@@ -77,9 +77,9 @@ pKsum<-ggplot(data = summaryKIL,
   labs(x = expression(paste(delta^{13}, "C (\u2030)")),
        y = expression(paste(delta^{15}, "N (\u2030)")))
 
-pA/pAsum
+pA/pAsum #this stacks the Angle lakes plots
 
-pK/pKsum
+pK/pKsum #this stacks the Killarney lake plots
 
 
 
