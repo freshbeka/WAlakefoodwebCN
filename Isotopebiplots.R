@@ -20,8 +20,12 @@ alldata.messy[grep("KIL", alldata.messy$Sample_ID),"Lake"] <- "Killarney"
 
 
 # If we want polygons, we need a way to categorize the data. 
-alldata.messy[grep("phytoplankton | periphyton | plants", alldata.messy$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
-alldata.messy[grep("insects | snail | zooplankton", alldata.messy$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
+alldata.messy[grep("phytoplankton", alldata.messy$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
+alldata.messy[grep("periphyton", alldata.messy$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
+alldata.messy[grep("plants", alldata.messy$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
+alldata.messy[grep("insects", alldata.messy$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
+alldata.messy[grep("snail", alldata.messy$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
+alldata.messy[grep("zooplankton", alldata.messy$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
 alldata.messy[grep("fish", alldata.messy$Type_of_Material),"TrophicGuild"] <- "Top Consumer"
 
 #I'm going to make different data sets for each lake.
@@ -40,8 +44,12 @@ summaryANG <- AngleCN %>%
             sdN = sd(d15N_air))
 
 # If we want polygons, we need a way to categorize the data. 
-summaryANG[grep("phytoplankton | periphyton | plants", summaryANG$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
-summaryANG[grep("insects | snail | zooplankton", summaryANG$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
+summaryANG[grep("phytoplankton", summaryANG$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
+summaryANG[grep("periphyton", summaryANG$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
+summaryANG[grep("plants", summaryANG$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
+summaryANG[grep("insects", summaryANG$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
+summaryANG[grep("snail", summaryANG$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
+summaryANG[grep("zooplankton", summaryANG$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
 summaryANG[grep("fish", summaryANG$Type_of_Material),"TrophicGuild"] <- "Top Consumer"
 
 #Killarney
@@ -55,12 +63,17 @@ summaryKIL <-KilCN %>% group_by(Type_of_Material) %>%
             sdC = sd(d13C_VPDB),
             sdN = sd(d15N_air))
 
-summaryKIL[grep("phytoplankton | periphyton | plants", summaryKIL$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
-summaryKIL[grep("insects | snail | zooplankton", summaryKIL$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
+summaryKIL[grep("phytoplankton", summaryKIL$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
+summaryKIL[grep("periphyton", summaryKIL$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
+summaryKIL[grep("plants", summaryKIL$Type_of_Material),"TrophicGuild"] <- "PrimaryProducer"
+summaryKIL[grep("insects", summaryKIL$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
+summaryKIL[grep("snail", summaryKIL$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
+summaryKIL[grep("zooplankton", summaryKIL$Type_of_Material),"TrophicGuild"] <- "PrimaryConsumer"
 summaryKIL[grep("fish", summaryKIL$Type_of_Material),"TrophicGuild"] <- "Top Consumer"
 
 ##Plots ####
 
+# Angel Lake
 # Extract a vector that is a convex hull of the points according to category.
 pp<-AngleCN %>% filter(TrophicGuild == "PrimaryProducer")
 AngChull.pp<-pp[chull(pp$d13C_VPDB, pp$d15N_air),]
@@ -104,48 +117,52 @@ A2<-ggplot(data = summaryANG,
 
 A1<-A1 + guides(color = FALSE) + theme(legend.position="left")
 A1 + A2 
-
-pK<-ggplot(data = KilCN, aes(x = d13C_VPDB, y = d15N_air, color = Type_of_Material)) +
-  geom_point() +
-  theme_minimal() +
-  labs(x = expression(paste(delta^{13}, "C (\u2030)")),
-       y = expression(paste(delta^{15}, "N (\u2030)")))
-
-##Summary plots
-
-
-pAsum<-ggplot(data = summaryANG, 
-              aes(x = aveC, 
-                  y = aveN, 
-                  color = Type_of_Material)) +
-  geom_point() +
-  geom_polygon(aes(color = TrophicGuild, fill = TrophicGuild), alpha = .2) +
-  geom_errorbar(aes(xmin=aveC-sdC, xmax=aveC+sdC), width=.2,
-                position=position_dodge(0.05)) +
-  geom_errorbar(aes( ymin=aveN-sdN, ymax=aveN+sdN), width=.2,
-                position=position_dodge(0.05)) +
-  theme_minimal() +
-  labs(x = expression(paste(delta^{13}, "C (\u2030)")),
-       y = expression(paste(delta^{15}, "N (\u2030)")))
-
-pKsum<-ggplot(data = summaryKIL, 
-       aes(x = aveC, 
-           y = aveN, 
-           color = Type_of_Material)) +
-  geom_point() +
-  geom_polygon(aes(color = TrophicGuild, fill = TrophicGuild), alpha = .2) +
-  geom_errorbar(aes(xmin=aveC-sdC, xmax=aveC+sdC), width=.2,
-                position=position_dodge(0.05)) +
-  geom_errorbar(aes( ymin=aveN-sdN, ymax=aveN+sdN), width=.2,
-                position=position_dodge(0.05)) +
-  theme_minimal() +
-  labs(x = expression(paste(delta^{13}, "C (\u2030)")),
-       y = expression(paste(delta^{15}, "N (\u2030)")))
-
-pA/pAsum #this stacks the Angle lakes plots
 ggsave("AngleLake.png")
 
-pK/pKsum #this stacks the Killarney lake plots
+# Repeat for Killarney
+# Extract a vector that is a convex hull of the points according to category.
+pp<-KilCN %>% filter(TrophicGuild == "PrimaryProducer")
+KilChull.pp<-pp[chull(pp$d13C_VPDB, pp$d15N_air),]
+pc<-KilCN %>% filter(TrophicGuild == "PrimaryConsumer")
+KilChull.pc<-pc[chull(pc$d13C_VPDB, pc$d15N_air),]
+KilChull <- bind_rows(KilChull.pp,KilChull.pc)
+
+# all individual samples, plotted with a convex hull around the values for 
+# primary producers and primary consumers
+B1<-ggplot(data = KilCN, aes(x = d13C_VPDB, 
+                               y = d15N_air, 
+                               color = Type_of_Material)) +
+  geom_point() +
+  scale_color_brewer(palette = "Dark2") +
+  geom_polygon(data=KilChull, 
+               aes(x=d13C_VPDB, y=d15N_air, 
+                   group = TrophicGuild,  
+                   fill = TrophicGuild), 
+               alpha = 0.2,
+               linetype = "blank") +
+  theme_minimal() +
+  labs(x = expression(paste(delta^{13}, "C (\u2030)")),
+       y = expression(paste(delta^{15}, "N (\u2030)")))
+
+
+#Also, just a simple plot with means and sds for each type of material sampled.
+B2<-ggplot(data = summaryKIL, 
+           aes(x = aveC, 
+               y = aveN, 
+               color = Type_of_Material)) +
+  geom_point() +
+  scale_color_brewer(palette = "Dark2") +
+  geom_errorbar(aes(xmin=aveC-sdC, xmax=aveC+sdC), width=.2,
+                position=position_dodge(0.05)) +
+  geom_errorbar(aes( ymin=aveN-sdN, ymax=aveN+sdN), width=.2,
+                position=position_dodge(0.05)) +
+  theme_minimal() +
+  labs(x = expression(paste(delta^{13}, "C (\u2030)")),
+       y = expression(paste(delta^{15}, "N (\u2030)"))) +
+  theme(legend.position="left")
+
+B1<-B1 + guides(color = FALSE) + theme(legend.position="left")
+B1 + B2 
 ggsave("KillarneyLake.png")
 
 
