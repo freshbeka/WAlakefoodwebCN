@@ -116,7 +116,7 @@ A2<-ggplot(data = summaryANG,
   theme(legend.position="left")
 
 A1<-A1 + guides(color = FALSE) + theme(legend.position="left")
-A1 + A2 
+A1 + A2 + plot_annotation(tag_levels = 'A')
 ggsave("AngleLake.png")
 
 # Repeat for Killarney
@@ -162,7 +162,7 @@ B2<-ggplot(data = summaryKIL,
   theme(legend.position="left")
 
 B1<-B1 + guides(color = FALSE) + theme(legend.position="left")
-B1 + B2 
+B1 + B2 + plot_annotation(tag_levels = 'A')
 ggsave("KillarneyLake.png")
 
 
