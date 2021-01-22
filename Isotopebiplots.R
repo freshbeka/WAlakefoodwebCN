@@ -96,7 +96,9 @@ A1<-ggplot(data = AngleCN, aes(x = d13C_VPDB,
                linetype = "blank") +
   theme_minimal() +
   labs(x = expression(paste(delta^{13}, "C (\u2030)")),
-       y = expression(paste(delta^{15}, "N (\u2030)")))
+       y = expression(paste(delta^{15}, "N (\u2030)"))) +
+  annotate(geom="text", x=-29.56, y=7.05, label="N_Comment",
+           color="black", cex = 2.5, vjust = 1.5)
 
 
 #Also, just a simple plot with means and sds for each type of material sampled.
@@ -113,11 +115,11 @@ A2<-ggplot(data = summaryANG,
   theme_minimal() +
   labs(x = expression(paste(delta^{13}, "C (\u2030)")),
        y = expression(paste(delta^{15}, "N (\u2030)"))) +
-  theme(legend.position="left")
+  theme(legend.position="left") 
 
 A1<-A1 + guides(color = FALSE) + theme(legend.position="left")
 A1 + A2 + plot_annotation(tag_levels = 'A')
-ggsave("AngleLake.png")
+ggsave("AngleLake.png", width = 13, height = 7, dpi = 300, units = "in", device='png')
 
 # Repeat for Killarney
 # Extract a vector that is a convex hull of the points according to category.
@@ -142,7 +144,9 @@ B1<-ggplot(data = KilCN, aes(x = d13C_VPDB,
                linetype = "blank") +
   theme_minimal() +
   labs(x = expression(paste(delta^{13}, "C (\u2030)")),
-       y = expression(paste(delta^{15}, "N (\u2030)")))
+       y = expression(paste(delta^{15}, "N (\u2030)"))) +
+  annotate(geom="text", x=-34.75, y=4.41, label="N_Comment",
+           color="black", cex = 2.5, vjust = 1.5)
 
 
 #Also, just a simple plot with means and sds for each type of material sampled.
@@ -163,7 +167,7 @@ B2<-ggplot(data = summaryKIL,
 
 B1<-B1 + guides(color = FALSE) + theme(legend.position="left")
 B1 + B2 + plot_annotation(tag_levels = 'A')
-ggsave("KillarneyLake.png")
+ggsave("KillarneyLake.png", width = 13, height = 7, dpi = 300, units = "in", device='png')
 
 
 
