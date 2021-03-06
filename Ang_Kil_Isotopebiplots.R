@@ -1,5 +1,4 @@
-# This script takes preliminary C & N isotope data from Angle and Killarny lakes
-# and plots them
+# This script takes preliminary C & N isotope data from Angle and Killarny lakes and plots them
 
 
 ### Libraries ####
