@@ -1,3 +1,6 @@
 # WAlakefoodwebCN
 
-This contains the script for plots that quickly look at lake CN data
+## Scripts
+One for plots that quickly look at CN data for two lakes.
+
+One for looking at past CN data for several lowland WA lakes. 
