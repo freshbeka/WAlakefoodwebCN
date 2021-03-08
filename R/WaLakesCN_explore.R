@@ -16,5 +16,9 @@ SIdata %>% group_by(Lake) %>% #group according to lake name
   filter(years>1) # filter the years that greater than 0
 
 #  Nine lakes have multiple sampling events, especially pine lake.
-# I think I want to give each sampling even a  unique identifer  so I don't accidentally pool the wrong data.
+# I want to give each sampling even a  unique identifier so I don't accidentally pool the wrong data. The easiest way is to create a combo of Lake and Year (probably).
+
+# Pausing to wake up Brook for school. When I return I want to create a new field with Lake_Year which should become a unique ID for  each sampling event.
+
+SIdata %>% 
 
