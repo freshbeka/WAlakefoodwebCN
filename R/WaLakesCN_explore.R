@@ -2,6 +2,7 @@
 
 library(readxl) #To read the excel file 
 library(tidyverse) # To organize and plot
+library(gridExtra) # used for grid.arrange (to call plots via a loop and plot as grid)
 
 # Review the sheet names in order to select the correct one.  
 excel_sheets("data/WA_Lake_SI_Data2021_PRELIM.xlsx")
@@ -20,11 +21,46 @@ SIdata %>% group_by(Lake) %>% #group according to lake name
 #  Nine lakes have multiple sampling events, especially pine lake.
 # I want to give each sampling even a  unique identifier so I don't accidentally pool the wrong data. The easiest way is to create a combo of Lake and Year (probably).
 SIdata_tidy <-SIdata %>% 
-  unite(col="Lake_Year", c(Lake, Year), sep="_", remove = FALSE) #create a new column called Lake_Year, based on the data from Lake & Year, separate with _, don't remove the previous Lake and Year Columns.
+  unite(col="Lake_Year", c(Lake, Year), sep="_", remove = FALSE) %>% #add new column called Lake_Year
+  filter(!is.na(Identity)) #remove the lake without ID info (Pine 2013)
+
 
 #Now I want to view the groups and see what is in each group.
 SIdata_tidy %>% distinct(Group) # great, this is helpful.
 
 SIdata_tidy %>% group_by(Lake_Year,Group) %>% summarize(total= n())
 
+#To quickly get a sense of each of the sampling events, I'm going to loop through each of the lakes and plot it.
+
+#how many lakes in all
+n_distinct(SIdata_tidy$Lake_Year)
+#there are 40 lakes. That is too many for one grid. I'll do two grids of 20
+
+p <- list() #create an empty list
+start<-0 #create an index if I cant get all lakes  into one grid
+for (i in 1:20){
+  i <- i+start
+  lake.name <-  unique(SIdata_tidy$Lake_Year)[i] #pull the relevant data
+  onelake <- SIdata_tidy %>% filter(Lake_Year == lake.name)
+  p[[i-start]]<-ggplot(data = onelake, aes(x = d13C, y = d15N, color = Group)) +
+    geom_point() + 
+    theme_minimal() +
+    theme(axis.title = element_blank()) +
+    ggtitle(lake.name)
+}
+do.call(grid.arrange,p)
+
+p <- list() #create an empty list
+start<-20 #use index to start at the 21st lake.
+for (i in 1:20){
+  i <- i+start
+  lake.name <-  unique(SIdata_tidy$Lake_Year)[i] #pull the relevant data
+  onelake <- SIdata_tidy %>% filter(Lake_Year == lake.name)
+  p[[i-start]]<-ggplot(data = onelake, aes(x = d13C, y = d15N, color = Group)) +
+    geom_point() + 
+    theme_minimal() +
+    theme(axis.title = element_blank()) +
+    ggtitle(lake.name)
+}
+do.call(grid.arrange,p)
 
