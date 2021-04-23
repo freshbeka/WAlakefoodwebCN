@@ -64,3 +64,29 @@ for (i in 1:20){
 }
 do.call(grid.arrange,p)
 
+# Now I want to take the mean of each major group (fish species) for each lake."Identity" is the co,umn to summarize.
+
+SImeans <- SIdata_tidy %>% 
+  group_by(Lake_Year, Identity, Group) %>% #separate by lake and species and group
+  summarise(d13C_mean = mean(d13C), #obtain mean and SD for each lake/species
+            d13C_sd = sd(d13C),
+            d15N_mean = mean(d15N),
+            d15N_sd = sd(d15N))
+
+##take a peek at a lake
+  lake.name <-  unique(SImeans$Lake_Year)[1] #pull the relevant data
+  onelake <- SImeans %>% filter(Lake_Year == lake.name) 
+  ggplot(data = onelake, aes(x = d13C_mean, y = d15N_mean, color = Group)) +
+    geom_point() + 
+    theme_minimal() +
+    theme(axis.title = element_blank()) +
+    ggtitle(lake.name)
+  
+# I think for each lake I'm going to need to select prey items to complete simple mixing models.
+# I could also select a mean and sd value and a monte carlo that includes uncertainty.
+
+
+
+
+
+
