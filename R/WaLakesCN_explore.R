@@ -86,6 +86,8 @@ SImeans <- SIdata_tidy %>%
 # I could also select a mean and sd value and a monte carlo that includes uncertainty. 
 # I want to ID what fish may be eating and look for regional patterns. First, I'm going to look at the more common species of fish.
   
-SImeans %>% filter(Group == "Fish") %>% group_by(Identity) %>% tally() %>% arrange(n)
+SImeans %>% filter(Group == "Fish") %>% group_by(Identity) %>% tally() %>% arrange(-n)
+# The most common species is pumpkinseed (Lepomis gibbosus), largemouth bass (Micropterus salmoides), and yellow perch (Perca flavescens)
+
 
 
