@@ -82,11 +82,10 @@ SImeans <- SIdata_tidy %>%
     theme(axis.title = element_blank()) +
     ggtitle(lake.name)
   
-# I think for each lake I'm going to need to select prey items to complete simple mixing models.
-# I could also select a mean and sd value and a monte carlo that includes uncertainty.
-
-
-
-
+# For each lake I'm going to need to select prey items to complete simple mixing models.
+# I could also select a mean and sd value and a monte carlo that includes uncertainty. 
+# I want to ID what fish may be eating and look for regional patterns. First, I'm going to look at the more common species of fish.
+  
+SImeans %>% filter(Group == "Fish") %>% group_by(Identity) %>% tally() %>% arrange(n)
 
 
