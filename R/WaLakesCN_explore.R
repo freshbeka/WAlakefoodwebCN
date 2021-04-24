@@ -89,5 +89,9 @@ SImeans <- SIdata_tidy %>%
 SImeans %>% filter(Group == "Fish") %>% group_by(Identity) %>% tally() %>% arrange(-n)
 # The most common species is pumpkinseed (Lepomis gibbosus), largemouth bass (Micropterus salmoides), and yellow perch (Perca flavescens)
 
+# I'll start with pumpkinseed.
+
+
+
 
 
