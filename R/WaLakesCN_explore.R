@@ -115,6 +115,21 @@ SImeans %>% filter(Group == "Fish") %>% group_by(Identity) %>% tally() %>% arran
 
 
 
+## creating a loop that calculates the relationship between pumpkinseed and a few other key species.
+lake.name <-  unique(SImeans$Lake_Year)
+i<-4
+for (i in 1:length(lake.name){
+  onelake <- SImeans %>% filter(Lake_Year == lake.name[i]) 
+  onelake %>% filter(Identity == Lepomis gibbosus) 
+  a <- i
+  print(a)
+}
+
+
+
+
+
+
 
 
 
