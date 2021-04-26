@@ -75,11 +75,11 @@ SImeans <- SIdata_tidy %>%
             d15N_sd = sd(d15N))
 
 ##take a peek at a lake
-  lake.name <-  unique(SImeans$Lake_Year)[2] #pull the relevant data
+  lake.name <-  unique(SImeans$Lake_Year)[3] #pull the relevant data
   onelake <- SImeans %>% filter(Lake_Year == lake.name) 
   ggplot(data = onelake, aes(x = d13C_mean, y = d15N_mean, color = Group, lable = Identity)) +
     geom_point() + 
-    geom_text_repel(aes(label = Identity, color = 'white', size = 1,  show.legend = FALSE)) +
+    geom_text_repel(aes(label = Identity, color = 'white', size = 1),  show.legend = FALSE) +
     geom_errorbar(aes(xmin=d13C_mean-d13C_sd, xmax=d13C_mean+d13C_sd), width=.2,
                   position=position_dodge(0.05)) +
     geom_errorbar(aes( ymin=d15N_mean-d15N_sd, ymax=d15N_mean+d15N_sd), width=.2,
@@ -109,7 +109,11 @@ SImeans %>% filter(Group == "Fish") %>% group_by(Identity) %>% tally() %>% arran
 # The most common species is pumpkinseed (Lepomis gibbosus), largemouth bass (Micropterus salmoides), and yellow perch (Perca flavescens)
 
 # I'll start with pumpkinseed.
-# Note, now that I look at the lakes, I see that when a sample is 1 or 2, it means that the same sample was run twice. I should not treat these as separate samples, rather they are getting at precision of the machine, and/or how well homogenized each sample is. I'll have to figure out how to deal with these.
+# Note, now that I look at the lakes, I see that when a sample is 1 or 2, it means that the same sample was run twice. I should not treat these as separate samples, rather they are getting at precision of the instruments used to measure C & N, and/or how well homogenized each sample is. I'll have to consider out how to deal with thes replicates.
+
+##I think I need to look at more quantitative differences related to N and C. For example, how much more enriched in N are the pumpkinseed relative to the crayfish?
+
+
 
 
 
