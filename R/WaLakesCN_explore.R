@@ -272,6 +272,17 @@ compfunction<- function(ident.main, ident.comp, comp.name) {
   return(df)
 }
 
+
+pumpkinseed.CMS <-compfunction("Lepomis gibbosus","Bellayma chinesis","pump.CMS" ) 
+p1<-ggplot(data = pumpkinseed.periphyton, aes(x = isotope, y = difference, fill = isotope)) +
+  geom_boxplot() + 
+  geom_jitter() + 
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_minimal() + 
+  xlab(label = "pumpkinseed and CMS")
+p1
+
+
 pumpkinseed.periphyton <-compfunction("Lepomis gibbosus","Periphyton","pump.periphyton" ) 
 p2<-ggplot(data = pumpkinseed.periphyton, aes(x = isotope, y = difference, fill = isotope)) +
   geom_boxplot() + 
