@@ -333,4 +333,4 @@ p6
 
 fullplot<-(p1 + p3 + p5)/(p6 + p4 + p2)
 
-ggsave("figs/comparisons.png",fullplot,  width = 10, height = 6, units = "in" )
+# ggsave("figs/comparisons.png",fullplot,  width = 10, height = 6, units = "in" )
