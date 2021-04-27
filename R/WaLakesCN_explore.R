@@ -4,6 +4,7 @@ library(readxl) #To read the excel file
 library(tidyverse) # To organize and plot
 library(gridExtra) # used for grid.arrange (to call plots via a loop and plot as grid)
 library(ggrepel) #for labeling species
+library(patchwork) #for multi panel plot
 
 # Review the sheet names in order to select the correct one.  
 excel_sheets("data/WA_Lake_SI_Data2021_PRELIM.xlsx")
@@ -242,6 +243,7 @@ for (i in 1:length(lake.name)){
                        difference = N.diff)
 }
 
+##Write a function for these comparisons####
 compfunction<- function(ident.main, ident.comp, comp.name) {
   df <- tibble(
     Lake_Year = character(),
@@ -270,9 +272,7 @@ compfunction<- function(ident.main, ident.comp, comp.name) {
   return(df)
 }
 
-pumpkinseed.periphyton <-compfunction("Lepomis gibbosus","Periphyton","pump.periphyton" )
-
-
+pumpkinseed.periphyton <-compfunction("Lepomis gibbosus","Periphyton","pump.periphyton" ) 
 p2<-ggplot(data = pumpkinseed.periphyton, aes(x = isotope, y = difference, fill = isotope)) +
   geom_boxplot() + 
   geom_jitter() + 
@@ -280,3 +280,46 @@ p2<-ggplot(data = pumpkinseed.periphyton, aes(x = isotope, y = difference, fill 
   theme_minimal() + 
   xlab(label = "pumpkinseed and periphyton")
 p2
+
+pumpkinseed.Chironomidae <-compfunction("Lepomis gibbosus","Chironomidae","pump.Chironomidae" ) 
+p3<-ggplot(data = pumpkinseed.Chironomidae, aes(x = isotope, y = difference, fill = isotope)) +
+  geom_boxplot() + 
+  geom_jitter() + 
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_minimal() + 
+  xlab(label = "pumpkinseed and Chironomidae")
+p3
+
+pumpkinseed.signal <-compfunction("Lepomis gibbosus","Pacifastacus leniusculus","pump.Crayfish" ) 
+p4<-ggplot(data = pumpkinseed.signal, aes(x = isotope, y = difference, fill = isotope)) +
+  geom_boxplot() + 
+  geom_jitter() + 
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_minimal() + 
+  xlab(label = "pumpkinseed and signal crayfish")
+p4
+
+#isopoda ####
+pumpkinseed.isopod <-compfunction("Lepomis gibbosus","Isopoda","pump.Crayfish" ) 
+p5<-ggplot(data = pumpkinseed.isopod, aes(x = isotope, y = difference, fill = isotope)) +
+  geom_boxplot() + 
+  geom_jitter() + 
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_minimal() + 
+  xlab(label = "pumpkinseed and isopod")
+p5
+
+
+#amphipods ####
+pumpkinseed.amphipod <-compfunction("Lepomis gibbosus","Gammaridae","pump.Crayfish" ) 
+p6<-ggplot(data = pumpkinseed.amphipod, aes(x = isotope, y = difference, fill = isotope)) +
+  geom_boxplot() + 
+  geom_jitter() + 
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_minimal() + 
+  xlab(label = "pumpkinseed and Gammaridae")
+p6
+
+fullplot<-(p1 + p3 + p5)/(p2 + p4 + p6)
+
+ggsave("figs/comparisons.png",fullplot,  width = 10, height = 6, units = "in" )
