@@ -274,7 +274,7 @@ compfunction<- function(ident.main, ident.comp, comp.name) {
 
 
 pumpkinseed.CMS <-compfunction("Lepomis gibbosus","Bellayma chinesis","pump.CMS" ) 
-p1<-ggplot(data = pumpkinseed.periphyton, aes(x = isotope, y = difference, fill = isotope)) +
+p1<-ggplot(data = pumpkinseed.CMS, aes(x = isotope, y = difference, fill = isotope)) +
   geom_boxplot() + 
   geom_jitter() + 
   geom_hline(yintercept = 0, linetype = "dashed") +
@@ -331,6 +331,6 @@ p6<-ggplot(data = pumpkinseed.amphipod, aes(x = isotope, y = difference, fill = 
   xlab(label = "pumpkinseed and Gammaridae")
 p6
 
-fullplot<-(p1 + p3 + p5)/(p2 + p4 + p6)
+fullplot<-(p1 + p3 + p5)/(p6 + p4 + p2)
 
 ggsave("figs/comparisons.png",fullplot,  width = 10, height = 6, units = "in" )
