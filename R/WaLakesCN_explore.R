@@ -67,7 +67,10 @@ for (i in 1:20){
 do.call(grid.arrange,p)
 
 SIdata_tidy
-# Note, now that I look at the lakes, I see that when a sample is 1 or 2, it means that the same sample was run twice. I should not treat these as separate samples, rather they are getting at precision of the instruments used to measure C & N, and/or how well homogenized each sample is. I'll have to consider out how to deal with these replicates. Later, I want to drop these numbers so I can combine better.
+# Note, now that I look at the lakes, I see that when a sample is 1 or 2, it means that the same sample was run twice. I should not treat these as separate samples, rather they are getting at precision of the instruments used to measure C & N, and/or how well homogenized each sample is. I am going to take the mean of the replicates, and replace with a single values. I don't think this is consistent among the lakes. Sometimes 1 and 1 are the same sample split into 2, other times it is ID-1, ID-2 that are the same organism. I'll need to dig in.
+
+## 
+
 
 
 # Now I want to take the mean of each major group (fish species) for each lake."Identity" is the co,umn to summarize.
