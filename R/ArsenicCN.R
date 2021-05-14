@@ -16,7 +16,7 @@ excel_sheets("data/Trophic.xlsx")
 
 trophic_messy <- read_excel("data/Trophic.xlsx", sheet = "results", skip = 1)
 
-#Now I want to separate out the pieces of data that I know I need, and clean up the sheet.
+#Now I want to separate out the pieces of data that I know I need, and clean up the tibble
 
 
 
