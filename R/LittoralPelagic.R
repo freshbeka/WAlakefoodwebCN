@@ -28,7 +28,8 @@ SImeans <- SIdata_tidy %>%
   dplyr::summarise(d13C_mean = mean(d13C), #obtain mean and SD for each lake/species
             d13C_sd = sd(d13C),
             d15N_mean = mean(d15N),
-            d15N_sd = sd(d15N))
+            d15N_sd = sd(d15N)) %>% 
+  ungroup()
 
 ## Isolate lakes that have both gastropod and zooplankton values.
 Gastronames <-SImeans %>% filter(Group == "Gastropod") %>% pull(Lake_Year)
@@ -79,5 +80,4 @@ for (j in 1:length(End.memberlakes)){
   }
   
 }
-warni
 
