@@ -36,11 +36,19 @@ Gastronames <-SImeans %>% filter(Group == "Gastropod") %>% pull(Lake_Year)
 Gastronames <- unique(Gastronames)
 Gastronames<-as_tibble(Gastronames)
 
+#check duplicates 
+SImeans %>% 
+  filter(Group == "Gastropod") %>% 
+  group_by(Lake_Year) %>% 
+  summarize(gast = n())
+
 Zoopnames <-SImeans %>% filter(Group == "Zooplankton") %>% pull(Lake_Year)
 Zoopnames <- unique(Zoopnames)
 Zoopnames<-as_tibble(Zoopnames)
 
 End.memberlakes<-inner_join(Gastronames, Zoopnames) %>% pull()
+
+##Which lakes have more than 1 gastropod or zoop?
 
 # For each lakes, I create a mixing model for pelagic vs littoral reliance by pumpkinseed.
 #I'm only doing this for 
@@ -56,8 +64,8 @@ df <- tibble(
   d15N_mean = numeric(),
   richness = numeric())
 
-j<-2
-i<-1
+j<-7
+i<-3
 
 for (j in 1:length(End.memberlakes)){   
   data <- SImeans %>% filter(Lake_Year == End.memberlakes[j])
@@ -65,8 +73,8 @@ for (j in 1:length(End.memberlakes)){
   for (i in 1:nrow(data %>% filter(Group == "Fish"))){   
     Cfish <- data %>% filter(Group == "Fish") %>% slice(i) %>% pull(d13C_mean) ## all fish
     Nfish <- data %>% filter(Group == "Fish") %>% slice(i) %>% pull(d15N_mean) ## all fish
-    lit <-data %>% filter(Group == "Gastropod") %>% slice(i) %>% pull(d13C_mean) ## I determine littoral 
-    pel <-data %>% filter(Group == "Zooplankton") %>% slice(i) %>% pull(d13C_mean) ## I determine pelagic
+    lit <-data %>% filter(Group == "Gastropod") %>% pull(d13C_mean) %>% mean() ## I determine littoral, and I take the mean incase there are more than 1 value.
+    pel <-data %>% filter(Group == "Zooplankton") %>%  pull(d13C_mean) %>% mean()## I determine pelagic. I take the mean incase there are more than 1 value.
     a <-data %>% filter(Group == "Fish") %>% slice(i) %>% pull(Lake_Year)
     b <-data %>% filter(Group == "Fish") %>% slice(i) %>% pull(Identity)
     c <- (Cfish - pel)/(lit - pel) ##I calculate the reliance as if I didn't have end-member data.
@@ -80,4 +88,14 @@ for (j in 1:length(End.memberlakes)){
   }
   
 }
+
+reliance <- df
+
+p1<-ggplot(data = reliance, aes(x = littoral.reliance, y = Identity)) +
+  geom_boxplot() + 
+  theme_minimal()
+
+ggplot(data = reliance, aes(x = littoral.reliance, color = Identity)) +
+  geom_density()  + 
+  theme_minimal()
 
