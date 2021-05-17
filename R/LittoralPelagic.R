@@ -91,11 +91,15 @@ for (j in 1:length(End.memberlakes)){
 
 reliance <- df
 
-p1<-ggplot(data = reliance, aes(x = littoral.reliance, y = Identity)) +
+p1 <- ggplot(data = reliance, aes(x = littoral.reliance, y = Identity)) +
   geom_boxplot() + 
   theme_minimal()
 
-ggplot(data = reliance, aes(x = littoral.reliance, color = Identity)) +
+p2 <- ggplot(data = reliance, aes(x = littoral.reliance, color = Identity)) +
   geom_density()  + 
   theme_minimal()
+
+#ggsave("figs/boxplot_littoralreliance.png",p1,  width = 10, height = 6, units = "in" )
+
+#ggsave("figs/density_littoralreliance.png",p2,  width = 10, height = 6, units = "in" )
 
