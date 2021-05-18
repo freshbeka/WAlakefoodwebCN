@@ -66,6 +66,23 @@ for (i in 1:20){
 }
 do.call(grid.arrange,p)
 
+set1<-unique(SIdata_tidy$Lake_Year)[1:20]
+set2<-unique(SIdata_tidy$Lake_Year)[21:40]
+
+##same idea, but with ggplot and facet wrap
+p1<-ggplot(data = SIdata_tidy %>% filter(Lake_Year %in% set1), aes(x = d13C, y = d15N, color = Group)) +
+  geom_point() + 
+  theme_bw() +
+  facet_wrap(~ Lake_Year)
+
+p2<-ggplot(data = SIdata_tidy %>% filter(Lake_Year %in% set2), aes(x = d13C, y = d15N, color = Group)) +
+  geom_point() + 
+  theme_bw() +
+  facet_wrap(~ Lake_Year)
+
+
+
+
 SIdata_tidy
 # Note, now that I look at the lakes, I see that when a sample is 1 or 2, it means that the same sample was run twice. I should not treat these as separate samples, rather they are getting at precision of the instruments used to measure C & N, and/or how well homogenized each sample is. I am going to take the mean of the replicates, and replace with a single values. I don't think this is consistent among the lakes. Sometimes 1 and 1 are the same sample split into 2, other times it is ID-1, ID-2 that are the same organism. I'll need to dig in.
 
