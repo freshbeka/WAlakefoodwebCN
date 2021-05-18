@@ -38,33 +38,6 @@ SIdata_tidy %>% group_by(Lake_Year,Group) %>% summarize(total= n())
 n_distinct(SIdata_tidy$Lake_Year)
 #there are 40 lakes. That is too many for one grid. I'll do two grids of 20
 
-p <- list() #create an empty list
-start<-0 #create an index if I cant get all lakes  into one grid
-for (i in 1:20){
-  i <- i+start
-  lake.name <-  unique(SIdata_tidy$Lake_Year)[i] #pull the relevant data
-  onelake <- SIdata_tidy %>% filter(Lake_Year == lake.name)
-  p[[i-start]]<-ggplot(data = onelake, aes(x = d13C, y = d15N, color = Group)) +
-    geom_point() + 
-    theme_minimal() +
-    theme(axis.title = element_blank()) +
-    ggtitle(lake.name)
-}
-do.call(grid.arrange,p)
-
-p <- list() #create an empty list
-start<-20 #use index to start at the 21st lake.
-for (i in 1:20){
-  i <- i+start
-  lake.name <-  unique(SIdata_tidy$Lake_Year)[i] #pull the relevant data
-  onelake <- SIdata_tidy %>% filter(Lake_Year == lake.name)
-  p[[i-start]]<-ggplot(data = onelake, aes(x = d13C, y = d15N, color = Group)) +
-    geom_point() + 
-    theme_minimal() +
-    theme(axis.title = element_blank()) +
-    ggtitle(lake.name)
-}
-do.call(grid.arrange,p)
 
 set1<-unique(SIdata_tidy$Lake_Year)[1:20]
 set2<-unique(SIdata_tidy$Lake_Year)[21:40]
@@ -80,6 +53,15 @@ p2<-ggplot(data = SIdata_tidy %>% filter(Lake_Year %in% set2), aes(x = d13C, y =
   theme_bw() +
   facet_wrap(~ Lake_Year)
 
+#ggsave("figs/Biplot1-20.png",p1,  width = 16, height = 9, units = "in" )
+#ggsave("figs/Biplot21-40.png",p2,  width = 16, height = 9, units = "in" )
+
+ggplot(data = SIdata_tidy, aes(x = d13C, y = d15N, color = Group)) +
+  geom_point() + 
+  theme_bw() +
+  facet_wrap(~ Lake_Year, ncol = 8)
+
+ggsave("figs/Biplot1-40.png",  width = 16, height = 9, units = "in" ) # It could be fun to play with this and learn to manipulate
 
 
 

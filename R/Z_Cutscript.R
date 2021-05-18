@@ -124,3 +124,36 @@ for (i in 1:length(lake.name)){
                        difference = N.diff)
 }
 #End delete####
+
+
+
+### Old way of facet wrap #
+
+p <- list() #create an empty list
+start<-0 #create an index if I cant get all lakes  into one grid
+for (i in 1:20){
+  i <- i+start
+  lake.name <-  unique(SIdata_tidy$Lake_Year)[i] #pull the relevant data
+  onelake <- SIdata_tidy %>% filter(Lake_Year == lake.name)
+  p[[i-start]]<-ggplot(data = onelake, aes(x = d13C, y = d15N, color = Group)) +
+    geom_point() + 
+    theme_minimal() +
+    theme(axis.title = element_blank()) +
+    ggtitle(lake.name)
+}
+do.call(grid.arrange,p)
+
+p <- list() #create an empty list
+start<-20 #use index to start at the 21st lake.
+for (i in 1:20){
+  i <- i+start
+  lake.name <-  unique(SIdata_tidy$Lake_Year)[i] #pull the relevant data
+  onelake <- SIdata_tidy %>% filter(Lake_Year == lake.name)
+  p[[i-start]]<-ggplot(data = onelake, aes(x = d13C, y = d15N, color = Group)) +
+    geom_point() + 
+    theme_minimal() +
+    theme(axis.title = element_blank()) +
+    ggtitle(lake.name)
+}
+do.call(grid.arrange,p)
+#### End old way of facet wrap ###
