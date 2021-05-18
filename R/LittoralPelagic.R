@@ -36,6 +36,7 @@ Gastronames <-SImeans %>% filter(Group == "Gastropod") %>% pull(Lake_Year)
 Gastronames <- unique(Gastronames)
 Gastronames<-as_tibble(Gastronames)
 
+##Which lakes have more than 1 gastropod or zoop?
 #check duplicates 
 SImeans %>% 
   filter(Group == "Gastropod") %>% 
@@ -48,7 +49,7 @@ Zoopnames<-as_tibble(Zoopnames)
 
 End.memberlakes<-inner_join(Gastronames, Zoopnames) %>% pull()
 
-##Which lakes have more than 1 gastropod or zoop?
+
 
 # For each lakes, I create a mixing model for pelagic vs littoral reliance by pumpkinseed.
 #I'm only doing this for 
@@ -102,4 +103,6 @@ p2 <- ggplot(data = reliance, aes(x = littoral.reliance, color = Identity)) +
 #ggsave("figs/boxplot_littoralreliance.png",p1,  width = 10, height = 6, units = "in" )
 
 #ggsave("figs/density_littoralreliance.png",p2,  width = 10, height = 6, units = "in" )
+
+
 
