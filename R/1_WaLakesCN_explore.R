@@ -10,10 +10,20 @@ library(patchwork) #for multi panel plot
 excel_sheets("data/WA_Lake_SI_Data2021_PRELIM.xlsx")
 
 ## read in the worksheet with the isotope data
-SIdata <- read_excel("data/WA_Lake_SI_Data2021_PRELIM.xlsx", sheet = "SI_Data")
+
+original <- read_excel("data/WA_Lake_SI_Data2021_PRELIM.xlsx", sheet = "SI_Data")
+SIdata <- original
 # Not read it yet is a sheet with lat-long ("Overview") and a summary of crayfish sightings ("Lake Summary")
 
 head(SIdata) #check info.
+
+#combine adult and juvenile M_salmoides. To do this, I will remove the word "juv" and "adu" so that the Micropterus are all the same.
+
+#First i archive the old list
+SIdata$Identity_old <- SIdata$Identity  
+
+SIdata$Identity <- str_replace(SIdata$Identity, "Micropterus salmoides juv", "Micropterus salmoides")
+SIdata$Identity <- str_replace(SIdata$Identity, "Micropterus salmoides adu", "Micropterus salmoides")
 
 ## first, I want to understand how many lakes have multiple sampling events.
 SIdata %>% group_by(Lake) %>% #group according to lake name
@@ -23,9 +33,7 @@ SIdata %>% group_by(Lake) %>% #group according to lake name
 SIdata %>% select(Lake) %>% distinct(Lake)
 
 # Remove Cresent, Cascade, Pleasant, Whatcom, Sunday, Fern, and Wynoochee)
-
 lakelist <- c("Crescent", "Cascade", "Pleasant", "Whatcom", "Sunday", "Fern", "Wynoochee")
-
 SIdata<-SIdata %>% filter(!(Lake %in% lakelist)) 
 
 
@@ -50,7 +58,7 @@ SIdata_tidy <-SIdata_tidy %>% filter(!(Group %in% removelist))
 
 #how many lakes in all
 n_distinct(SIdata_tidy$Lake_Year)
-#there are 40 lakes. That is too many for one grid. I'll do two grids of 20
+#there are 33 lakes. That is too many for one grid. I'll do two grids of 16/17
 
 
 set1<-unique(SIdata_tidy$Lake_Year)[1:16]
