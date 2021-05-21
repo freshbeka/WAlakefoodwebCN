@@ -177,8 +177,8 @@ individual.reliance <- df
 
 L.gibbosus <-individual.reliance %>% filter(Identity == "Lepomis gibbosus")
 
-p2 <- ggplot(data = L.gibbosus, aes(x = littoral.reliance)) +
-  geom_density(aes(color = Lake_Year))  + 
+p2 <- ggplot(data = L.gibbosus, aes(x = littoral.reliance, y = Identity)) +
+  geom_boxplot()  + 
   theme_minimal()
 
 ggsave("figs/density_littoralreliance_lake.png",p2,  width = 10, height = 6, units = "in" )

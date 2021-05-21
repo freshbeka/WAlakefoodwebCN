@@ -157,3 +157,147 @@ for (i in 1:20){
 }
 do.call(grid.arrange,p)
 #### End old way of facet wrap ###
+
+
+## START OF OLD COMPARISON BETWEEN SOURCES ## 
+# Now I want to take the mean of each major group (fish species) for each lake."Identity" is the co,umn to summarize.
+
+SImeans <- SIdata_tidy %>% 
+  group_by(Lake_Year, Identity, Group) %>% #separate by lake and species and group
+  summarise(d13C_mean = mean(d13C), #obtain mean and SD for each lake/species
+            d13C_sd = sd(d13C),
+            d15N_mean = mean(d15N),
+            d15N_sd = sd(d15N))
+
+##take a peek at a lake
+lake.name <-  unique(SImeans$Lake_Year)[3] #pull the relevant data
+onelake <- SImeans %>% filter(Lake_Year == lake.name) 
+ggplot(data = onelake, aes(x = d13C_mean, y = d15N_mean, color = Group, lable = Identity)) +
+  geom_point() + 
+  geom_text_repel(aes(label = Identity, color = 'white', size = 1),  show.legend = FALSE) +
+  geom_errorbar(aes(xmin=d13C_mean-d13C_sd, xmax=d13C_mean+d13C_sd), width=.2,
+                position=position_dodge(0.05)) +
+  geom_errorbar(aes( ymin=d15N_mean-d15N_sd, ymax=d15N_mean+d15N_sd), width=.2,
+                position=position_dodge(0.05)) +
+  theme_minimal() +
+  theme(axis.title = element_blank()) +
+  ggtitle(lake.name)
+
+#Can I ID diet for just pumpkin seed vs blue gill?
+ggplot(data = onelake, aes(x = d13C_mean, y = d15N_mean, color = Group)) +
+  geom_point() + 
+  geom_point(data = SIdata_tidy %>% filter(Lake_Year == lake.name) %>% filter(Identity == "Lepomis gibbosus"), aes(x = d13C, y = d15N), color = "black") + 
+  geom_point(data = SIdata_tidy %>% filter(Lake_Year == lake.name) %>% filter(Group == "Aquatic invertebrate"), aes(x = d13C, y = d15N), color = "gray") +
+  geom_errorbar(aes(xmin=d13C_mean-d13C_sd, xmax=d13C_mean+d13C_sd), width=.2,
+                position=position_dodge(0.05)) +
+  geom_errorbar(aes( ymin=d15N_mean-d15N_sd, ymax=d15N_mean+d15N_sd), width=.2,
+                position=position_dodge(0.05)) +
+  theme_minimal() +
+  theme(axis.title = element_blank()) +
+  ggtitle(lake.name)
+
+# For each lake I'm going to need to select prey items to complete simple mixing models.
+# I could also select a mean and sd value and a monte carlo that includes uncertainty. 
+# I want to ID what fish may be eating and look for regional patterns. First, I'm going to look at the more common species of fish.
+
+SImeans %>% filter(Group == "Fish") %>% group_by(Identity) %>% tally() %>% arrange(-n)
+# The most common species is pumpkinseed (Lepomis gibbosus), largemouth bass (Micropterus salmoides), and yellow perch (Perca flavescens)
+
+samples<-SImeans %>% group_by(Identity) %>% tally() %>% arrange(-n)
+
+# I'll start by thinking about pumpkinseed.
+
+
+##I think I need to look at more quantitative differences related to N and C. For example, how much more enriched in N are the pumpkinseed relative to the crayfish?
+
+##Write a function for comparisons between identity groups####
+compfunction<- function(ident.main, ident.comp, comp.name) {
+  df <- tibble(
+    Lake_Year = character(),
+    comparison = character(),
+    isotope = character(),
+    difference = numeric())
+  lake.name <-  unique(SImeans$Lake_Year)
+  for (i in 1:length(lake.name)){
+    onelake <- SImeans %>% filter(Lake_Year == lake.name[i]) 
+    main.d13C <-onelake %>% filter(Identity == ident.main) %>% select(d13C_mean) %>%pull()
+    main.d15N <-onelake %>% filter(Identity == ident.main) %>% select(d15N_mean) %>%pull()
+    comp.d13C <-onelake %>% filter(Identity == ident.comp) %>% select(d13C_mean) %>%pull()
+    comp.d15N <-onelake %>% filter(Identity == ident.comp) %>% select(d15N_mean) %>%pull()
+    C.diff <-main.d13C - comp.d13C
+    N.diff <-main.d15N - comp.d15N
+    comp <- comp.name
+    df <- df %>% add_row(Lake_Year =lake.name[i],
+                         comparison = comp,
+                         isotope = "carbon",
+                         difference = C.diff)
+    df <- df %>% add_row(Lake_Year =lake.name[i],
+                         comparison = comp,
+                         isotope = "nitrogen",
+                         difference = N.diff)
+  }
+  return(df)
+}
+
+
+pumpkinseed.CMS <-compfunction("Lepomis gibbosus","Bellayma chinesis","pump.CMS" ) 
+p1<-ggplot(data = pumpkinseed.CMS, aes(x = isotope, y = difference, fill = isotope)) +
+  geom_boxplot() + 
+  geom_jitter() + 
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_minimal() + 
+  xlab(label = "pumpkinseed and CMS")
+p1
+
+
+pumpkinseed.periphyton <-compfunction("Lepomis gibbosus","Periphyton","pump.periphyton" ) 
+p2<-ggplot(data = pumpkinseed.periphyton, aes(x = isotope, y = difference, fill = isotope)) +
+  geom_boxplot() + 
+  geom_jitter() + 
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_minimal() + 
+  xlab(label = "pumpkinseed and periphyton")
+p2
+
+pumpkinseed.Chironomidae <-compfunction("Lepomis gibbosus","Chironomidae","pump.Chironomidae" ) 
+p3<-ggplot(data = pumpkinseed.Chironomidae, aes(x = isotope, y = difference, fill = isotope)) +
+  geom_boxplot() + 
+  geom_jitter() + 
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_minimal() + 
+  xlab(label = "pumpkinseed and Chironomidae")
+p3
+
+pumpkinseed.signal <-compfunction("Lepomis gibbosus","Pacifastacus leniusculus","pump.Crayfish" ) 
+p4<-ggplot(data = pumpkinseed.signal, aes(x = isotope, y = difference, fill = isotope)) +
+  geom_boxplot() + 
+  geom_jitter() + 
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_minimal() + 
+  xlab(label = "pumpkinseed and signal crayfish")
+p4
+
+#isopoda ####
+pumpkinseed.isopod <-compfunction("Lepomis gibbosus","Isopoda","pump.Crayfish" ) 
+p5<-ggplot(data = pumpkinseed.isopod, aes(x = isotope, y = difference, fill = isotope)) +
+  geom_boxplot() + 
+  geom_jitter() + 
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_minimal() + 
+  xlab(label = "pumpkinseed and isopod")
+p5
+
+
+#amphipods ####
+pumpkinseed.amphipod <-compfunction("Lepomis gibbosus","Gammaridae","pump.Crayfish" ) 
+p6<-ggplot(data = pumpkinseed.amphipod, aes(x = isotope, y = difference, fill = isotope)) +
+  geom_boxplot() + 
+  geom_jitter() + 
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_minimal() + 
+  xlab(label = "pumpkinseed and Gammaridae")
+p6
+
+fullplot<-(p1 + p3 + p5)/(p6 + p4 + p2)
+
+# ggsave("figs/comparisons.png",fullplot,  width = 10, height = 6, units = "in" )
