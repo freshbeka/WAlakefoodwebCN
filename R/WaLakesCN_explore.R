@@ -20,6 +20,15 @@ SIdata %>% group_by(Lake) %>% #group according to lake name
   summarise(years = n_distinct(Year)) %>% # tally up the number of years
   filter(years>1) # filter the years that greater than 0
 
+SIdata %>% select(Lake) %>% distinct(Lake)
+
+# Remove Cresent, Cascade, Pleasant, Whatcom, Sunday, Fern, and Wynoochee)
+
+lakelist <- c("Crescent", "Cascade", "Pleasant", "Whatcom", "Sunday", "Fern", "Wynoochee")
+
+SIdata %>% filter(!(Lake %in% lakelist)) 
+
+
 #  Nine lakes have multiple sampling events, especially pine lake.
 # I want to give each sampling even a  unique identifier so I don't accidentally pool the wrong data. The easiest way is to create a combo of Lake and Year (probably).
 SIdata_tidy <-SIdata %>% 
@@ -33,6 +42,18 @@ SIdata_tidy %>% distinct(Group) # great, this is helpful.
 SIdata_tidy %>% group_by(Lake_Year,Group) %>% summarize(total= n())
 
 #To quickly get a sense of each of the sampling events, I'm going to loop through each of the lakes and plot it.
+
+##Now I remove Frogs, Bread, bird
+
+SIdata_tidy <-SIdata_tidy %>% filter(Group != "Frog")
+SIdata_tidy <-SIdata_tidy %>% filter(Group != "Bread")
+SIdata_tidy <-SIdata_tidy %>% filter(Group != "Bird")
+
+
+
+
+
+SIdata_tidy <- SIdata_tidy %>% filter
 
 #how many lakes in all
 n_distinct(SIdata_tidy$Lake_Year)
@@ -53,8 +74,8 @@ p2<-ggplot(data = SIdata_tidy %>% filter(Lake_Year %in% set2), aes(x = d13C, y =
   theme_bw() +
   facet_wrap(~ Lake_Year)
 
-#ggsave("figs/Biplot1-20.png",p1,  width = 16, height = 9, units = "in" )
-#ggsave("figs/Biplot21-40.png",p2,  width = 16, height = 9, units = "in" )
+ggsave("figs/Biplot1-20.png",p1,  width = 16, height = 9, units = "in" )
+ggsave("figs/Biplot21-40.png",p2,  width = 16, height = 9, units = "in" )
 
 ggplot(data = SIdata_tidy, aes(x = d13C, y = d15N, color = Group)) +
   geom_point() + 
