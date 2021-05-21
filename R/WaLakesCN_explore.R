@@ -26,7 +26,7 @@ SIdata %>% select(Lake) %>% distinct(Lake)
 
 lakelist <- c("Crescent", "Cascade", "Pleasant", "Whatcom", "Sunday", "Fern", "Wynoochee")
 
-SIdata %>% filter(!(Lake %in% lakelist)) 
+SIdata<-SIdata %>% filter(!(Lake %in% lakelist)) 
 
 
 #  Nine lakes have multiple sampling events, especially pine lake.
@@ -44,24 +44,17 @@ SIdata_tidy %>% group_by(Lake_Year,Group) %>% summarize(total= n())
 #To quickly get a sense of each of the sampling events, I'm going to loop through each of the lakes and plot it.
 
 ##Now I remove Frogs, Bread, bird
+removelist <- c("Bread", "Bird", "Frog")
 
-SIdata_tidy <-SIdata_tidy %>% filter(Group != "Frog")
-SIdata_tidy <-SIdata_tidy %>% filter(Group != "Bread")
-SIdata_tidy <-SIdata_tidy %>% filter(Group != "Bird")
-
-
-
-
-
-SIdata_tidy <- SIdata_tidy %>% filter
+SIdata_tidy <-SIdata_tidy %>% filter(!(Group %in% removelist)) 
 
 #how many lakes in all
 n_distinct(SIdata_tidy$Lake_Year)
 #there are 40 lakes. That is too many for one grid. I'll do two grids of 20
 
 
-set1<-unique(SIdata_tidy$Lake_Year)[1:20]
-set2<-unique(SIdata_tidy$Lake_Year)[21:40]
+set1<-unique(SIdata_tidy$Lake_Year)[1:16]
+set2<-unique(SIdata_tidy$Lake_Year)[17:33]
 
 ##same idea, but with ggplot and facet wrap
 p1<-ggplot(data = SIdata_tidy %>% filter(Lake_Year %in% set1), aes(x = d13C, y = d15N, color = Group)) +
@@ -74,15 +67,15 @@ p2<-ggplot(data = SIdata_tidy %>% filter(Lake_Year %in% set2), aes(x = d13C, y =
   theme_bw() +
   facet_wrap(~ Lake_Year)
 
-ggsave("figs/Biplot1-20.png",p1,  width = 16, height = 9, units = "in" )
-ggsave("figs/Biplot21-40.png",p2,  width = 16, height = 9, units = "in" )
+ggsave("figs/Biplot1-16.png",p1,  width = 16, height = 9, units = "in" )
+ggsave("figs/Biplot17-33.png",p2,  width = 16, height = 9, units = "in" )
 
 ggplot(data = SIdata_tidy, aes(x = d13C, y = d15N, color = Group)) +
   geom_point() + 
   theme_bw() +
-  facet_wrap(~ Lake_Year, ncol = 8)
+  facet_wrap(~ Lake_Year, ncol = 7)
 
-ggsave("figs/Biplot1-40.png",  width = 16, height = 9, units = "in" ) # It could be fun to play with this and learn to manipulate
+ggsave("figs/Biplot1-33.png",  width = 16, height = 9, units = "in" ) # It could be fun to play with this and learn to manipulate
 
 
 
