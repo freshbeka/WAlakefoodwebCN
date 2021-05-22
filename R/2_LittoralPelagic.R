@@ -8,11 +8,11 @@ library(patchwork) #for multi-panel plot
 
 
 # read in the tidy data
-SIdata_tidy <- read_csv("data/SI_tidy.csv")
+SIdata_subset <- read_csv("data/SI_subset.csv")
 
 
 ##get the means for each identity
-SImeans <- SIdata_tidy %>% 
+SImeans <- SIdata_subset %>% 
   group_by(Lake_Year, Identity, Group) %>% #separate by lake and species and group
   dplyr::summarise(d13C_mean = mean(d13C), #obtain mean and SD for each lake/species
             d13C_sd = sd(d13C),
@@ -49,16 +49,12 @@ End.memberlakes
 df <- tibble(
   Lake_Year = character(),
   Identity = character(),
-  littoral.reliance = numeric(),
-  d13C_mean = numeric(),
-  d15N_mean = numeric(),
-  richness = numeric(),
-  group = character())
+  littoral.reliance = numeric())
 
 j<-7
 i<-3
 
-for (j in 1:length(SIdata_tidy)){   
+for (j in 1:length(SIdata_subset)){   
   data <- SImeans %>% filter(Lake_Year == End.memberlakes[j])
   
   for (i in 1:nrow(data %>% filter(Group == "Fish"))){   
@@ -69,15 +65,9 @@ for (j in 1:length(SIdata_tidy)){
     a <-data %>% filter(Group == "Fish") %>% slice(i) %>% pull(Lake_Year)
     b <-data %>% filter(Group == "Fish") %>% slice(i) %>% pull(Identity)
     c <- (Cfish - pel)/(lit - pel) ##I calculate the reliance as if I didn't have end-member data.
-    d <- data %>% filter(Group == "Fish") %>% nrow()
-    e <- "Fish"
     df <- df %>% add_row(Lake_Year =a,
                          Identity = b,
-                         littoral.reliance = c,
-                         d13C_mean = Cfish,
-                         d15N_mean = Nfish,
-                         richness = d,
-                         group = e)
+                         littoral.reliance = c)
   }
   
 }

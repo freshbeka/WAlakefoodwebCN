@@ -10,7 +10,7 @@ drive_download("https://docs.google.com/spreadsheets/d/1NhbrwkDI7Karzcyk_s3CepfQ
                path = "/Users/rebekahstiling/Desktop/RProjects/WAlakefoodwebCN/data/Trophic.xlsx",
                overwrite = TRUE)
 
-## The file was saved locally in the project, now I want to read it in with excel
+## The file was saved locally to my machine, now I want to read it into RStudio 
 
 #check the sheets
 excel_sheets("data/Trophic.xlsx")
@@ -22,7 +22,7 @@ trophic_messy <- read_excel("data/Trophic.xlsx",
 
 #Now I want to separate out the pieces of data that I know I need, and clean up the tibble
 
-#First I want to consolodate the values that have C & N
+#First I want to consolidate the values that have C & N
 
 isotopes_messy <- trophic_messy %>% drop_na(uc_davis_id)
 
@@ -32,7 +32,6 @@ isotopes_messy <- isotopes_messy %>% filter(species != "Species")
 #change some columns from character to numeric
 cols.num <- c("fillet_as", "liver_as", "gill_as","d13cvpdb","d15n_air")
 isotopes_messy[cols.num] <- sapply(isotopes_messy[cols.num],as.numeric)
-
 
 # start with plotting the C & N from Angle
 

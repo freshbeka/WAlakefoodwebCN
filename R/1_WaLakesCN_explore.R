@@ -1,12 +1,11 @@
 #=== === === === === === === ===
 # Script started by Rebekah Stiling Spring 2021, stilir@uw.edu
 # This script takes C & N isotope data from several Washington lowland lakes, organizes it, and plots it.
+# This script also subsets the lakes into just the ones from Julian that will be used for the food web component of the paper.
 #=== === === === === === === ===
 
 library(readxl) #To read the excel file 
 library(tidyverse) # To organize and plot
-library(ggrepel) #for labeling species
-library(patchwork) #for multi panel plot
 
 # Review the sheet names in order to select the correct one.  
 excel_sheets("data/WA_Lake_SI_Data2021_PRELIM.xlsx")
@@ -91,11 +90,21 @@ ggplot(data = SIdata_tidy, aes(x = d13C, y = d15N, color = Group)) +
 
 ggsave("figs/Biplot1-33.png",  width = 16, height = 9, units = "in" ) # It could be fun to play with this and learn to manipulate
 
-SIdata_tidy
-# Note, now that I look at the lakes, I see that when a sample is 1 or 2, it means that the same sample was run twice. I should not treat these as separate samples, rather they are getting at precision of the instruments used to measure C & N, and/or how well homogenized each sample is. I am going to take the mean of the replicates, and replace with a single values. I don't think this is consistent among the lakes. Sometimes 1 and 1 are the same sample split into 2, other times it is ID-1, ID-2 that are the same organism. I'll need to dig in.
+SIdata_tidy 
 
-## 
 write_csv(SIdata_tidy, "data/SI_tidy.csv")
+
+# This subsets the list of lakes that will be used in the publication. One sampling event per lake. No Angle and Killarney because they will be from the most
+# recent events from Jim annd Erin
+
+lakes4paper <- c("Cottage_2009", "Desire_2014", "Fenwick_2014", "Fivemile_2014",
+                 "Geneva_2014", "Langlois_2013","Martha_2012", "North_2014", 
+                 "Padden_2012","Pine_2016", "Shoecraft_2013", "Silver_2014", 
+                 "Star_2013","Steel_2009", "Trout_2009","Walsh_2012", "Wilderness_2014")
+
+SIdata_subset <- SIdata_tidy %>% filter((Lake_Year %in% lakes4paper)) 
+
+write_csv(SIdata_subset, "data/SI_subset.csv")
 
 
 # END INITIAL WRANGLING/CLEANING #### 
