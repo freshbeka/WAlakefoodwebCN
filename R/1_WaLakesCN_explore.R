@@ -1,7 +1,7 @@
 #=== === === === === === === ===
 # Script started by Rebekah Stiling Spring 2021, stilir@uw.edu
 # This script takes C & N isotope data from several Washington lowland lakes, organizes it, and plots it.
-# This script also subsets the lakes into just the ones from Julian that will be used for the food web component of the paper.
+# This script also subsets the lakes into just the lakes that will be used for a food web component of an arsenic study with Jim Gawal and Erin Hull.
 #=== === === === === === === ===
 
 library(readxl) #To read the excel file 
@@ -13,8 +13,8 @@ excel_sheets("data/WA_Lake_SI_Data2021_PRELIM.xlsx")
 ## read in the worksheet with the isotope data
 original <- read_excel("data/WA_Lake_SI_Data2021_PRELIM.xlsx", sheet = "SI_Data")
 
-SIdata <- original #give it a new name so as to be able to reference the original
-
+#give it a new name so as to be able to reference the original
+SIdata <- original 
 head(SIdata) #check info.
 
 #changes per Julian: 
@@ -46,24 +46,31 @@ SIdata %>% group_by(Lake) %>% #group according to lake name
   summarise(years = n_distinct(Year)) %>% # tally up the number of years
   filter(years>1) # filter the years that greater than 0
 
-#  Nine lakes have multiple sampling events, especially pine lake.
+#  ten lakes have multiple sampling events, especially pine lake.
 # I want to give each sampling even a  unique identifier so I don't accidentally pool the wrong data. The easiest way is to create a combo of Lake and Year (probably).
 SIdata_tidy <-SIdata %>% 
   unite(col="Lake_Year", c(Lake, Year), sep="_", remove = FALSE) %>% #add new column called Lake_Year
   filter(!is.na(Identity)) #remove the lake without ID info (Pine 2013)
 
-
 #Now I want to view the groups and see what is in each group.
 SIdata_tidy %>% distinct(Group) # great, this is helpful.
 
-SIdata_tidy %>% group_by(Lake_Year,Group) %>% summarize(total= n())
+##Now I read in the Bothell data, then combine the two datasets ####
+
+# Review the sheet names in order to select the correct one.  
+excel_sheets("data/UW_BothelSI.xlsx")
+
+## read in the worksheet with the isotope data
+bothell <- read_excel("data/UW_BothelSI.xlsx", sheet = "ForMerge")
+
+
+
 
 #To quickly get a sense of each of the sampling events, I'm going to loop through each of the lakes and plot it.
 
 #how many lakes in all
 n_distinct(SIdata_tidy$Lake_Year)
 #there are 33 lakes. That is too many for one grid. I'll do two grids of 16/17
-
 
 set1<-unique(SIdata_tidy$Lake_Year)[1:16]
 set2<-unique(SIdata_tidy$Lake_Year)[17:33]

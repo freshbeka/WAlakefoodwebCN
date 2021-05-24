@@ -7,7 +7,7 @@ library(ggrepel) #for labeling species
 library(patchwork) #for multi-panel plot
 
 
-# read in the tidy data
+# read in Julian's tidy data
 SIdata_subset <- read_csv("data/SI_subset.csv")
 
 
@@ -38,13 +38,20 @@ Zoopnames<-as_tibble(Zoopnames)
 
 End.memberlakes<-inner_join(Gastronames, Zoopnames) %>% pull()
 
-
-
 # For each lakes, I create a mixing model for pelagic vs littoral reliance by pumpkinseed.
 #I'm only doing this for 
 End.memberlakes
 
-# calculate the littoral reliance value for each species ####
+#which lakes do I not have zoops and snails for?
+SImeans %>% select(Lake_Year) %>% distinct() %>% filter(!(Lake_Year %in% End.memberlakes)) 
+## I will need to estimate or use some other data for endmembers in these 6 lakes.
+
+
+
+
+
+
+# calculate the littoral reliance value for each fish species ####
 #create empty dataframe
 df <- tibble(
   Lake_Year = character(),
