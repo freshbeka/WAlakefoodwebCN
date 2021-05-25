@@ -55,18 +55,7 @@ SIdata_tidy <-SIdata %>%
 #Now I want to view the groups and see what is in each group.
 SIdata_tidy %>% distinct(Group) # great, this is helpful.
 
-##Now I read in the Bothell data, then combine the two datasets ####
-
-# Review the sheet names in order to select the correct one.  
-excel_sheets("data/UW_BothelSI.xlsx")
-
-## read in the worksheet with the isotope data
-bothell <- read_excel("data/UW_BothelSI.xlsx", sheet = "ForMerge")
-
-
-
-
-#To quickly get a sense of each of the sampling events, I'm going to loop through each of the lakes and plot it.
+#To quickly get a sense of each of Julian's sampling events, I'm going to loop through each of the lakes and plot it.
 
 #how many lakes in all
 n_distinct(SIdata_tidy$Lake_Year)
@@ -89,7 +78,7 @@ p2<-ggplot(data = SIdata_tidy %>% filter(Lake_Year %in% set2), aes(x = d13C, y =
 ggsave("figs/Biplot1-16.png",p1,  width = 16, height = 9, units = "in" )
 ggsave("figs/Biplot17-33.png",p2,  width = 16, height = 9, units = "in" )
 
-## All of them together
+## All of Julian's together
 ggplot(data = SIdata_tidy, aes(x = d13C, y = d15N, color = Group)) +
   geom_point() + 
   theme_bw() +
@@ -101,15 +90,50 @@ SIdata_tidy
 
 write_csv(SIdata_tidy, "data/SI_tidy.csv")
 
-# This subsets the list of lakes that will be used in the publication. One sampling event per lake. No Angle and Killarney because they will be from the most
-# recent events from Jim annd Erin
 
-lakes4paper <- c("Cottage_2009", "Desire_2014", "Fenwick_2014", "Fivemile_2014",
-                 "Geneva_2014", "Langlois_2013","Martha_2012", "North_2014", 
+## Now I read in the Bothell data, then combine the two datasets ####
+# Review the sheet names in order to select the correct one.  
+excel_sheets("data/UW_BothelSI.xlsx")
+
+## read in the worksheet with the isotope data
+bothell <- read_excel("data/UW_BothelSI.xlsx", sheet = "ForMerge")
+
+# create a combo of Lake and Year 
+bothell_lakeyear <-bothell %>% 
+  unite(col="Lake_Year", c(Lake, Year), sep="_", remove = FALSE) %>% #add new column called Lake_Year
+  filter(!is.na(Identity))
+##Problem! the bothell data was not collected at the same sampling event! Grr.. These data are spread over mulitple years/months. I presume they want them all plotted together, but that is not a clean/tidy presentation of data.
+
+#What I need to do, is give the true bothell_lake_year one column, so as to preserve that information, and then renam the off years because Lake_Year is my unique identifier for each lake for plotting.
+
+bothell_lakeyear$old_Lake_Year <- bothell_lakeyear$Lake_Year
+
+bothell_lakeyear$Lake_Year <-str_replace(bothell_lakeyear$Lake_Year, "Angle_2020", "Angle_2019")
+bothell_lakeyear$Lake_Year <-str_replace(bothell_lakeyear$Lake_Year, "Angle_2018", "Angle_2019")
+bothell_lakeyear$Lake_Year <-str_replace(bothell_lakeyear$Lake_Year, "Killarney_2020", "Killarney_2019")
+bothell_lakeyear$Lake_Year <-str_replace(bothell_lakeyear$Lake_Year, "Killarney_2018", "Killarney_2019")
+
+#Now I merge the two datasets
+
+all.si.data <-bind_rows(bothell_lakeyear,SIdata_tidy)
+
+
+# This subsets the list of lakes that will be used in the publication. One sampling event per lake. This includes Angle and Killarney, the most recent sampling events from Jim annd Erin
+
+lakes4paper <- c("Angle_2019","Cottage_2009", "Desire_2014", "Fenwick_2014", "Fivemile_2014",
+                 "Geneva_2014", "Killarney_2019","Langlois_2013","Martha_2012", "North_2014", 
                  "Padden_2012","Pine_2016", "Shoecraft_2013", "Silver_2014", 
                  "Star_2013","Steel_2009", "Trout_2009","Walsh_2012", "Wilderness_2014")
 
-SIdata_subset <- SIdata_tidy %>% filter((Lake_Year %in% lakes4paper)) 
+SIdata_subset <- all.si.data %>% filter((Lake_Year %in% lakes4paper)) 
+
+# check the plots
+ggplot(data = SIdata_subset, aes(x = d13C, y = d15N, color = Group)) +
+  geom_point() + 
+  theme_bw() +
+  facet_wrap(~ Lake_Year)
+
+# 
 
 write_csv(SIdata_subset, "data/SI_subset.csv")
 

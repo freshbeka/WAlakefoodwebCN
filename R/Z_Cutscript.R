@@ -301,3 +301,52 @@ p6
 fullplot<-(p1 + p3 + p5)/(p6 + p4 + p2)
 
 # ggsave("figs/comparisons.png",fullplot,  width = 10, height = 6, units = "in" )
+
+
+##Now do it for crayfish ###
+
+#Of the endmember lakes, which have crayfish?
+crayfish.lakes<- SImeans %>% filter(Group == "Crayfish") %>% pull(Lake_Year) %>% unique()
+crayfish.lakes<-as_tibble(crayfish.lakes)
+
+End.lakes <-as_tibble(End.memberlakes)
+
+Cray.end.lakes <-inner_join(End.lakes, crayfish.lakes) %>% pull()
+
+df <- tibble(
+  Lake_Year = character(),
+  Identity = character(),
+  littoral.reliance = numeric(),
+  d13C_mean = numeric(),
+  d15N_mean = numeric(),
+  richness = numeric(),
+  group = character())
+
+j<-7
+i<-2
+
+for (j in 1:length(Cray.end.lakes)){   
+  data <- SImeans %>% filter(Lake_Year == Cray.end.lakes[j])
+  
+  for (i in 1:nrow(data %>% filter(Group == "Crayfish"))){   
+    Cfish <- data %>% filter(Group == "Crayfish") %>% slice(i) %>% pull(d13C_mean) ## all fish
+    Nfish <- data %>% filter(Group == "Crayfish") %>% slice(i) %>% pull(d15N_mean) ## all fish
+    lit <-data %>% filter(Group == "Gastropod") %>% pull(d13C_mean) %>% mean() ## I determine littoral, and I take the mean incase there are more than 1 value.
+    pel <-data %>% filter(Group == "Zooplankton") %>%  pull(d13C_mean) %>% mean()## I determine pelagic. I take the mean incase there are more than 1 value.
+    a <-data %>% filter(Group == "Crayfish") %>% slice(i) %>% pull(Lake_Year)
+    b <-data %>% filter(Group == "Crayfish") %>% slice(i) %>% pull(Identity)
+    c <- (Cfish - pel)/(lit - pel) ##I calculate the reliance as if I didn't have end-member data.
+    d <- data %>% filter(Group == "Fish") %>% nrow()
+    e <- "Crayfish"
+    df <- df %>% add_row(Lake_Year =a,
+                         Identity = b,
+                         littoral.reliance = c,
+                         d13C_mean = Cfish,
+                         d15N_mean = Nfish,
+                         richness = d,
+                         group = e)
+  }
+  
+}
+
+crayfish_reliance <- df
