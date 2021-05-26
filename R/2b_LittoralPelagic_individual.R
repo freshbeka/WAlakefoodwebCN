@@ -40,7 +40,34 @@ L.gibbosus_Angle <- individual.reliance %>%
 L.macrochirus <-individual.reliance %>% 
   filter(Identity == "Lepomis macrochirus")
 
-Angle.Killarney.individuals <- bind_rows(L.gibbosus,L.macrochirus)
+##OK, in order to get this legend to work, I think I need to make some new columns.
+
+## Regional lakes
+#A column for linetype
+L.gibbosus$linetype <- "solid"
+#A column for color
+L.gibbosus$legend.name <- "Pumpkinseed, regional lakes"  
+#A column for size <-
+L.gibbosus$linesize <- 0.5
+
+## Angle lake
+# color
+L.gibbosus$legend.name <- L.gibbosus %>% 
+  filter(Lake_Year == "Angle_2019") %>%  
+  str_replace(legend.name, "Pumpkinseed, regional lakes", "Pumpkinseed, Angle Lake") 
+#A column for size <-
+L.gibbosus$linesize <- 1.5
+
+##Killarney
+#A column for linetype
+L.macrochirus$linetype <- "twodash"
+#A column for color
+L.macrochirus$legend.name <- "Bluegill, Killarney Lake"  
+#A column for size <-
+L.macrochirus$linesize <- 1.5
+
+
+plot. <- bind_rows(L.gibbosus,L.macrochirus)
 
 A19 <- "#e66101"
 K19 <- "#2c7bb6"
@@ -50,7 +77,7 @@ oth <- "#fdb863"
 p2 <- ggplot(data = L.gibbosus, 
            aes(x = littoral.reliance, 
                color = Lake_Year)) +
-  geom_density()  + 
+  geom_density(size = .5)  + 
   theme_minimal() +
   scale_color_manual(values=c(A19, #pumpkinseed/angle_2019
                               rep(oth,3), 
