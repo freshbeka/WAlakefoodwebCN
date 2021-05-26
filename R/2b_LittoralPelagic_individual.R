@@ -47,7 +47,7 @@ K19 <- "#2c7bb6"
 oth <- "#fdb863"
 
 
-p2 <- ggplot(data = Angle.Killarney.individuals, 
+p2 <- ggplot(data = L.gibbosus, 
            aes(x = littoral.reliance, 
                color = Lake_Year)) +
   geom_density()  + 
@@ -61,6 +61,7 @@ p2 <- ggplot(data = Angle.Killarney.individuals,
                aes(x = littoral.reliance))+
   geom_density(data = L.macrochirus, 
                size = 1.5,
+               linetype = "twodash", ## remove this to remove dashed lines
                aes(x = littoral.reliance)) +
   labs(colour="Lake", x = "Littoral reliance") +
   theme(legend.position="none")
@@ -70,3 +71,5 @@ p2
 
 
 ggsave("figs/density_littoralreliance_indlake.png",p2,  width = 10, height = 6, units = "in" )
+
+ggsave("figs/density_littoralreliance_indlake_BWsafe.png",p2,  width = 10, height = 6, units = "in" )
