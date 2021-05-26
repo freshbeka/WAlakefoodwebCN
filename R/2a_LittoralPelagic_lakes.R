@@ -77,9 +77,11 @@ reliance <- df
 p1 <- ggplot(data = reliance, aes(x = littoral.reliance, y = Identity)) +
   geom_boxplot() + 
   geom_jitter() + 
-  theme_minimal()
+  theme_minimal() +
+  labs(x = "Littoral reliance", y = "Species")
+p1  
 
-ggsave("figs/boxplot_littoralreliance_species.png",p1,  width = 10, height = 6, units = "in" )
+ggsave("figs/boxplot_littoralreliance_species.png",p1,  width = 7, height = 4, units = "in" )
 
 
 
