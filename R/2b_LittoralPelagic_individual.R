@@ -42,9 +42,9 @@ L.macrochirus <-individual.reliance %>%
 
 Angle.Killarney.individuals <- bind_rows(L.gibbosus,L.macrochirus)
 
-A19 <- "#fdae61"
+A19 <- "#e66101"
 K19 <- "#2c7bb6"
-oth <- "#abd9e9"
+oth <- "#fdb863"
 
 
 p2 <- ggplot(data = Angle.Killarney.individuals, 
