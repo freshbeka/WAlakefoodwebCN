@@ -80,17 +80,30 @@ reliance <- df
 # Color the fish to match the other plot
 # Expand the Z axis to go to  0.00 
 
-drop.species <- c("Cottidae spp.","Ambloplites rupestris")
+
+reliance<-reliance %>% filter(!(Identity %in% c("Cottidae spp.","Ambloplites rupestris")))
+
+reliance$Identity <- factor(reliance$Identity , levels=c("Micropterus salmoides",
+                                                         "Perca flavescens",
+                                                         "Lepomis macrochirus",
+                                                         "Lepomis gibbosus"))
+
+
 
 p1 <- ggplot(data = reliance %>% filter(!(Identity %in% drop.species)), 
-             aes(x = littoral.reliance, y = Identity)) +
+             aes(x = littoral.reliance, y = Identity, color = Identity)) +
   geom_boxplot() + 
-  geom_jitter() + 
+  geom_point() + 
   theme_minimal() +
-  labs(x = "Littoral reliance", y = "Species")
-
-
-
+  scale_color_manual(values=c("black", # M. Salmoides
+                              "black", # Perch
+                              "#2c7bb6", #BlueGill
+                              "#e66101")) + #PKS
+  scale_x_continuous(name = "Littoral reliance", limits = c(0,1.25), 
+                     breaks = c(0.0,0.2,0.4, 0.6, 0.8, 1.0)) + 
+  theme(axis.text.y = element_text(color = c("black","black","#2c7bb6","#e66101"))) +
+  labs(y = "Species") +
+  theme(legend.position = "none")
 
 p1  
 

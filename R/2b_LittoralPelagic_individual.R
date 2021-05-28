@@ -40,7 +40,7 @@ L.gibbosus_Angle <- individual.reliance %>%
 L.macrochirus <-individual.reliance %>% 
   filter(Identity == "Lepomis macrochirus")
 
-##OK, in order to get this legend to work, I think I need to make some new columns.
+##OK, in order to get this legend to work, I think I need to make some a new column for the three different categories.
 
 ## Regional lakes
 #A column for linetype
@@ -133,3 +133,38 @@ p2
 ggsave("figs/density_littoralreliance_indlake.png",p1,  width = 10, height = 6, units = "in" )
 
 ggsave("figs/density_littoralreliance_indlake_BWsafe.png",p2,  width = 7, height = 4, units = "in" )
+
+
+#TEST ALTERNATIVE APPROACH
+ggplot(data = plot.data, 
+           aes(x = littoral.reliance, 
+               group = Lake_Year,
+               color = legend.name,
+               linetype = linetype,
+               linesize = linesize)) +
+  stat_density(aes(size = linesize), geom = "line", position = "identity")  + 
+  geom_density(data = plot.data %>% filter(Lake_Year == 'Angle_2019'),
+               aes(x = littoral.reliance, 
+                   group = Lake_Year,
+                   color = legend.name,
+                   linetype = linetype,
+                   size = linesize),
+               show.legend = FALSE) +
+  geom_density(data = plot.data %>% filter(Lake_Year == 'Killarney_2019'),
+               aes(x = littoral.reliance, 
+                   group = Lake_Year,
+                   color = legend.name,
+                   linetype = linetype,
+                   size = linesize),
+               show.legend = FALSE) +
+  theme_minimal() +
+  scale_color_manual(values=c(K19, #bluegill/killarney 
+                              A19,  #pumpkinseed/angle_2019
+                              oth)) +
+  scale_size_manual(values = c(1.5, 0.5) ) +
+  labs(colour="Lake", x = "Littoral reliance") + 
+  guides(linetype = FALSE) +
+  guides(size = FALSE) +
+  guides(fill=TRUE) +
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(override.aes = list(size = c(2,2,1))))
