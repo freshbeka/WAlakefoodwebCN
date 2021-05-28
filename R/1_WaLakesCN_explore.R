@@ -31,12 +31,12 @@ SIdata$Identity <- str_replace(SIdata$Identity, "Micropterus salmoides adu", "Mi
 # 1b. Five Mile needs to be Fivemile
 SIdata$Lake <- str_replace(SIdata$Lake, "Five Mile", "Fivemile")
 
-# 2. Remove Cresent, Cascade, Pleasant, Whatcom, Sunday, Fern, and Wynoochee)
-lakelist <- c("Crescent", "Cascade", "Pleasant", "Whatcom", "Sunday", "Fern", "Wynoochee")
+# 2. Remove Cresent, Cascade, Pleasant, Whatcom, Sunday, Fern, and Wynoochee) (Padden added because of poor littoral/pelagic distinction between zoops and snails)
+lakelist <- c("Crescent", "Cascade", "Pleasant", "Whatcom", "Sunday", "Fern", "Wynoochee", "Padden")
 SIdata<-SIdata %>% filter(!(Lake %in% lakelist)) 
 
-# 3. Remove Nerka, Clarkii, and P. oregonensis
-fishlist <- c("Oncorhynchus nerka", "Oncorhynchus clarkii", "Ptychocheilus oregonensis")
+# 3. Remove Nerka, Clarkii, and P. oregonensis. Oncorhynchus mykiss added because infrequent and they are stocked for fishing, so may have wierd isotope values.
+fishlist <- c("Oncorhynchus nerka", "Oncorhynchus clarkii", "Ptychocheilus oregonensis", "Oncorhynchus mykiss")
 SIdata<-SIdata %>% filter(!(Identity %in% fishlist)) 
 
 # 4. Now I remove Frogs, Bread, bird
@@ -67,19 +67,7 @@ n_distinct(SIdata_tidy$Lake_Year)
 #there are 33 lakes. That is too many for one grid. I'll do two grids of 16/17
 
 set1<-unique(SIdata_tidy$Lake_Year)[1:16]
-set2<-unique(SIdata_tidy$Lake_Year)[17:33]
-
-padden.all<-ggplot(data = SIdata_tidy %>% filter(Lake_Year== "Padden_2012"), aes(x = d13C, y = d15N, color = Group)) +
-  geom_point() + 
-  theme_bw() 
-
-mix<-c("Fish", "Gastropod", "Zooplankton")
-
-padden.mix <- ggplot(data = SIdata_tidy %>% 
-                       filter(Group %in% mix & Lake_Year== "Padden_2012"), 
-                     aes(x = d13C, y = d15N, color = Group)) + geom_point() + theme_bw() 
-library(patchwork)
-padden.all + padden.mix
+set2<-unique(SIdata_tidy$Lake_Year)[17:32]
 
 
 ##same idea, but with ggplot and facet wrap
@@ -94,7 +82,7 @@ p2<-ggplot(data = SIdata_tidy %>% filter(Lake_Year %in% set2), aes(x = d13C, y =
   facet_wrap(~ Lake_Year)
 
 ggsave("figs/Biplot1-16.png",p1,  width = 16, height = 9, units = "in" )
-ggsave("figs/Biplot17-33.png",p2,  width = 16, height = 9, units = "in" )
+ggsave("figs/Biplot17-32.png",p2,  width = 16, height = 9, units = "in" )
 
 ## All of Julian's together
 ggplot(data = SIdata_tidy, aes(x = d13C, y = d15N, color = Group)) +
@@ -102,7 +90,7 @@ ggplot(data = SIdata_tidy, aes(x = d13C, y = d15N, color = Group)) +
   theme_bw() +
   facet_wrap(~ Lake_Year, ncol = 7)
 
-ggsave("figs/Biplot1-33.png",  width = 16, height = 9, units = "in" ) # It could be fun to play with this and learn to manipulate
+ggsave("figs/BiplotALL.png",  width = 16, height = 9, units = "in" ) # It could be fun to play with this and learn to manipulate
 
 SIdata_tidy 
 
@@ -140,7 +128,7 @@ all.si.data <-bind_rows(bothell_lakeyear,SIdata_tidy)
 
 lakes4paper <- c("Angle_2019","Cottage_2009", "Desire_2014", "Fenwick_2014", "Fivemile_2014",
                  "Geneva_2014", "Killarney_2019","Langlois_2013","Martha_2012", "North_2014", 
-                 "Padden_2012","Pine_2016", "Shoecraft_2013", "Silver_2014", 
+                "Pine_2016", "Shoecraft_2013", "Silver_2014", 
                  "Star_2013","Steel_2009", "Trout_2009","Walsh_2012", "Wilderness_2014")
 
 SIdata_subset <- all.si.data %>% filter((Lake_Year %in% lakes4paper)) 

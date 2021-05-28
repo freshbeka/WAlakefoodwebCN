@@ -74,11 +74,24 @@ for (j in 1:length(End.memberlakes)){
 
 reliance <- df
 
-p1 <- ggplot(data = reliance, aes(x = littoral.reliance, y = Identity)) +
+
+#This plot needs cleaning up.
+# Drop Cottidae and Ambloplites rupestris
+# Color the fish to match the other plot
+# Expand the Z axis to go to  0.00 
+
+drop.species <- c("Cottidae spp.","Ambloplites rupestris")
+
+p1 <- ggplot(data = reliance %>% filter(!(Identity %in% drop.species)), 
+             aes(x = littoral.reliance, y = Identity)) +
   geom_boxplot() + 
   geom_jitter() + 
   theme_minimal() +
   labs(x = "Littoral reliance", y = "Species")
+
+
+
+
 p1  
 
 ggsave("figs/boxplot_littoralreliance_species.png",p1,  width = 7, height = 4, units = "in" )
