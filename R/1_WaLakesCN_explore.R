@@ -7,6 +7,8 @@
 library(readxl) #To read the excel file 
 library(tidyverse) # To organize and plot
 
+##Note to self: RETURN TO THIS AND REMOVE PADDEN, and low number species. 5/27/2021
+
 # Review the sheet names in order to select the correct one.  
 excel_sheets("data/WA_Lake_SI_Data2021_PRELIM.xlsx")
 
@@ -41,6 +43,9 @@ SIdata<-SIdata %>% filter(!(Identity %in% fishlist))
 removelist <- c("Bread", "Bird", "Frog")
 SIdata <-SIdata %>% filter(!(Group %in% removelist)) 
 
+# 5. Rename Cottidae to Cottidae spp
+SIdata$Identity <- str_replace(SIdata$Identity, "Cottidae", "Cottidae spp.")
+
 ## How many lakes have multiple sampling events?
 SIdata %>% group_by(Lake) %>% #group according to lake name
   summarise(years = n_distinct(Year)) %>% # tally up the number of years
@@ -63,6 +68,19 @@ n_distinct(SIdata_tidy$Lake_Year)
 
 set1<-unique(SIdata_tidy$Lake_Year)[1:16]
 set2<-unique(SIdata_tidy$Lake_Year)[17:33]
+
+padden.all<-ggplot(data = SIdata_tidy %>% filter(Lake_Year== "Padden_2012"), aes(x = d13C, y = d15N, color = Group)) +
+  geom_point() + 
+  theme_bw() 
+
+mix<-c("Fish", "Gastropod", "Zooplankton")
+
+padden.mix <- ggplot(data = SIdata_tidy %>% 
+                       filter(Group %in% mix & Lake_Year== "Padden_2012"), 
+                     aes(x = d13C, y = d15N, color = Group)) + geom_point() + theme_bw() 
+library(patchwork)
+padden.all + padden.mix
+
 
 ##same idea, but with ggplot and facet wrap
 p1<-ggplot(data = SIdata_tidy %>% filter(Lake_Year %in% set1), aes(x = d13C, y = d15N, color = Group)) +
