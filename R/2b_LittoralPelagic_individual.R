@@ -43,25 +43,13 @@ L.macrochirus <-individual.reliance %>%
 ##OK, in order to get this legend to work, I think I need to make some a new column for the three different categories.
 
 ## Regional lakes
-#A column for linetype
-L.gibbosus$linetype <- "solid"
-#A column for color
+#A column for plotting category
 L.gibbosus <- L.gibbosus %>% mutate(legend.name = if_else(Lake_Year == "Angle_2019",  
                                             "Pumpkinseed, Angle Lake", 
                                             "Pumpkinseed, regional lakes"))
-#A column for size <-
-L.gibbosus <- L.gibbosus %>% mutate(linesize = if_else(Lake_Year == "Angle_2019",  
-                                                       "fat", 
-                                                       "thin"))
 
-##Killarney
-#A column for linetype
-L.macrochirus$linetype <- "twodash"
-#A column for color
+#A column for plotting category
 L.macrochirus$legend.name <- "Bluegill, Killarney Lake"  
-#A column for size <-
-L.macrochirus$linesize <- "fat"
-
 
 plot.data <- bind_rows(L.macrochirus,L.gibbosus)
 
@@ -94,38 +82,45 @@ p1<-ggplot(data = L.gibbosus,
 ## easiest plot, no legend, but difficult to create legend for!
   
 ## line legend below, I had to use "stat_density" instead of geom_density in order to get lines in my legend rather than boxes!
-p2<-ggplot(data = plot.data, 
-           aes(x = littoral.reliance, 
-               group = Lake_Year,
-               color = legend.name,
-               linetype = linetype,
-               linesize = linesize)) +
-  stat_density(aes(size = linesize), geom = "line", position = "identity")  + 
+p2<- ggplot(data = plot.data, 
+         aes(x = littoral.reliance, 
+             group = Lake_Year,
+             color = legend.name,
+             linetype = legend.name,
+             linesize = legend.name)) +
+  stat_density(aes(size = legend.name), geom = "line", position = "identity")  + 
   geom_density(data = plot.data %>% filter(Lake_Year == 'Angle_2019'),
                aes(x = littoral.reliance, 
                    group = Lake_Year,
                    color = legend.name,
-                   linetype = linetype,
-                   size = linesize),
+                   linetype = legend.name,
+                   size = legend.name),
                show.legend = FALSE) +
   geom_density(data = plot.data %>% filter(Lake_Year == 'Killarney_2019'),
                aes(x = littoral.reliance, 
                    group = Lake_Year,
                    color = legend.name,
-                   linetype = linetype,
-                   size = linesize),
+                   linetype = legend.name,
+                   size = legend.name),
                show.legend = FALSE) +
   theme_minimal() +
   scale_color_manual(values=c(K19, #bluegill/killarney 
                               A19,  #pumpkinseed/angle_2019
                               oth)) +
-  scale_size_manual(values = c(1.5, 0.5) ) +
-  labs(colour="Lake", x = "Littoral reliance") + 
-  guides(linetype = FALSE) +
+  scale_size_manual(values = c(1.5, 
+                               1.5, 
+                               0.5) ) +
+  scale_linetype_manual(values = c("dotted", 
+                                   "solid", 
+                                   "solid")) +
+  labs(colour="Lake", linetype = "Lake", x = "Littoral reliance") + 
+  scale_x_continuous(name = "Littoral reliance", limits = c(-0.75,1.75), 
+                     breaks = c(0.0,0.5,1.0)) +
   guides(size = FALSE) +
   guides(fill=TRUE) +
   theme(legend.position = "bottom") +
   guides(color = guide_legend(override.aes = list(size = c(2,2,1))))
+
 
 
 p2
@@ -135,36 +130,3 @@ ggsave("figs/density_littoralreliance_indlake.png",p1,  width = 10, height = 6, 
 ggsave("figs/density_littoralreliance_indlake_BWsafe.png",p2,  width = 7, height = 4, units = "in" )
 
 
-#TEST ALTERNATIVE APPROACH
-ggplot(data = plot.data, 
-           aes(x = littoral.reliance, 
-               group = Lake_Year,
-               color = legend.name,
-               linetype = linetype,
-               linesize = linesize)) +
-  stat_density(aes(size = linesize), geom = "line", position = "identity")  + 
-  geom_density(data = plot.data %>% filter(Lake_Year == 'Angle_2019'),
-               aes(x = littoral.reliance, 
-                   group = Lake_Year,
-                   color = legend.name,
-                   linetype = linetype,
-                   size = linesize),
-               show.legend = FALSE) +
-  geom_density(data = plot.data %>% filter(Lake_Year == 'Killarney_2019'),
-               aes(x = littoral.reliance, 
-                   group = Lake_Year,
-                   color = legend.name,
-                   linetype = linetype,
-                   size = linesize),
-               show.legend = FALSE) +
-  theme_minimal() +
-  scale_color_manual(values=c(K19, #bluegill/killarney 
-                              A19,  #pumpkinseed/angle_2019
-                              oth)) +
-  scale_size_manual(values = c(1.5, 0.5) ) +
-  labs(colour="Lake", x = "Littoral reliance") + 
-  guides(linetype = FALSE) +
-  guides(size = FALSE) +
-  guides(fill=TRUE) +
-  theme(legend.position = "bottom") +
-  guides(color = guide_legend(override.aes = list(size = c(2,2,1))))
