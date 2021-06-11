@@ -4,20 +4,21 @@
 library(googledrive) #to read in the data directly from googledrive
 library(readxl) #to convert the excel file into a R object
 library(janitor) # to clean up rownames
+library(tidyverse) #for organizing and plotting
 
 ##First, call the file from the google drive and save it in the data file location
-drive_download("https://docs.google.com/spreadsheets/d/1NhbrwkDI7Karzcyk_s3CepfQbVTc3vRT/edit#gid=574100294", 
-               path = "/Users/rebekahstiling/Desktop/RProjects/WAlakefoodwebCN/data/Trophic.xlsx",
+drive_download("https://docs.google.com/spreadsheets/d/1qe0RBzG0_HZdpPLTUukH7BOrrH4Qblte/edit#gid=890212752", 
+               path = "/Users/rebekahstiling/Desktop/RProjects/WAlakefoodwebCN/data/Trophic2.xlsx",
                overwrite = TRUE)
 
 ## The file was saved locally to my machine, now I want to read it into RStudio 
 
 #check the sheets
-excel_sheets("data/Trophic.xlsx")
+excel_sheets("data/Trophic2.xlsx")
 
-trophic_messy <- read_excel("data/Trophic.xlsx", 
+trophic_messy <- read_excel("data/Trophic2.xlsx", 
                             sheet = "results", 
-                            skip = 1,
+                            skip = 2,
                             .name_repair = make_clean_names)
 
 #Now I want to separate out the pieces of data that I know I need, and clean up the tibble
@@ -64,8 +65,13 @@ ggplot(data = isotopes_messy, aes(x = d13cvpdb, y = d15n_air, color = species)) 
   scale_size(range = c(0.5, 12))  +
   facet_grid(. ~ lake) +
   theme_bw() +
-  labs(x = "d13C", y = "d15N", size = "fillet As (ug/g)" )
+  labs(x = expression(italic(delta)^13*C),
+       y = expression(italic(delta)^15*N), 
+       size = expression(paste(
+         "Total As (",
+         mu, g, "/", g,
+         ")", sep="")))
 
-#ggsave("figs/comparAs.png", width = 10, height = 6, units = "in" )
+ggsave("figs/comparAs_ALSO.png", width = 10, height = 6, units = "in" )
 
 
