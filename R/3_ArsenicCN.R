@@ -34,6 +34,12 @@ isotopes_messy <- isotopes_messy %>% filter(species != "Species")
 cols.num <- c("fillet_as", "liver_as", "gill_as","d13cvpdb","d15n_air")
 isotopes_messy[cols.num] <- sapply(isotopes_messy[cols.num],as.numeric)
 
+
+##Change CMS to snail for ASLO
+isotopes_messy<-mutate(isotopes_messy, species = if_else(species == "Chinese mystery", "snail", species))
+
+isotopes_messy<-mutate(isotopes_messy, species = if_else(species == "Chironomid", "chironomid", species))
+
 # start with plotting the C & N from Angle
 
 ggplot(data = isotopes_messy %>% filter(lake == "Angle"), aes(x = d13cvpdb, y = d15n_air, shape = species)) +
@@ -59,6 +65,9 @@ ggplot(data = isotopes_messy %>% filter(lake == "Killarney"), aes(x = d13cvpdb, 
   labs(title = "Killarney Lake", x = "d13C", y = "d15N")
 
 #combine with facet wrap
+
+isotopes_messy$species <- factor(isotopes_messy$species, # Relevel species factor
+                         levels = c("Pumpkinseed", "Bluegill", "zooplankton", "snail", "phytoplankton", "surface periphyton", "chironomid", "macrophytes"))
 
 ggplot(data = isotopes_messy, aes(x = d13cvpdb, y = d15n_air, color = species)) +
   geom_point(aes(size = fillet_as, color = species), alpha = .75) +
