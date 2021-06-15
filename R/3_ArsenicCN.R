@@ -80,7 +80,7 @@ macro <- "#de77ae"
 
 
 ggplot(data = isotopes_messy, aes(x = d13cvpdb, y = d15n_air, color = species)) +
-  geom_point(aes(size = fillet_as, color = species), alpha = .65) +
+  geom_point(aes(size = fillet_as, color = species), alpha = .75) +
   scale_size(range = c(3, 17))  +
   facet_grid(. ~ lake) +
   theme_bw() +
