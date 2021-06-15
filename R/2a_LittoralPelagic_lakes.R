@@ -83,23 +83,43 @@ reliance <- df
 
 reliance<-reliance %>% filter(!(Identity %in% c("Cottidae spp.","Ambloplites rupestris")))
 
+reliance$common <- reliance$Identity
+
+reliance<-mutate(reliance, common = 
+                   if_else(common == "Micropterus salmoides", "largemouth bass", 
+                           if_else(common == "Perca flavescens","yellow perch", 
+                                   if_else(common == "Lepomis gibbosus","pumpkinseed", 
+                                           if_else(common == "Lepomis macrochirus","bluegill", common)))))
+
+
 reliance$Identity <- factor(reliance$Identity , levels=c("Micropterus salmoides",
                                                          "Perca flavescens",
                                                          "Lepomis macrochirus",
                                                          "Lepomis gibbosus"))
 
+reliance$common <- factor(reliance$common , levels=c("largemouth bass",
+                                                         "yellow perch",
+                                                         "bluegill",
+                                                         "pumpkinseed"))
+
+##in order to lable jittered points
 
 
-p1 <- ggplot(data = reliance %>% filter(!(Identity %in% drop.species)), 
-             aes(x = littoral.reliance, y = Identity, color = Identity)) +
+p1 <- ggplot(data = reliance, 
+             aes(x = littoral.reliance, y = common, color = common, label = Lake_Year)) +
   geom_boxplot() + 
   geom_point() + 
+  geom_label_repel(fill = alpha(c("white"),0.8),
+                   aes(label=ifelse(Lake_Year == "Angle_2019", "Angle Lake",
+                                   ifelse(Lake_Year == "Killarney_2019", "Lake Killarney",''))),
+                  box.padding = 0.5, 
+                  min.segment.length = 0) +
   theme_minimal() +
   scale_color_manual(values=c("black", # M. Salmoides
                               "black", # Perch
                               "#2c7bb6", #BlueGill
                               "#e66101")) + #PKS
-  scale_x_continuous(name = "Littoral reliance", limits = c(0,1.25), 
+  scale_x_continuous(name = "littoral derived fish body carbon", limits = c(0,1.25), 
                      breaks = c(0.0,0.2,0.4, 0.6, 0.8, 1.0)) + 
   theme(axis.text.y = element_text(color = c("black","black","#2c7bb6","#e66101"))) +
   labs(y = "Species") +
@@ -107,7 +127,7 @@ p1 <- ggplot(data = reliance %>% filter(!(Identity %in% drop.species)),
 
 p1  
 
-ggsave("figs/boxplot_littoralreliance_species.png",p1,  width = 7, height = 4, units = "in" )
+ggsave("figs/boxplot_littoralreliance_species_ASLO.png",p1,  width = 7, height = 5, units = "in" )
 
 
 
