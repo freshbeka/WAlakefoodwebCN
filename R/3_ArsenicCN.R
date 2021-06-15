@@ -69,11 +69,29 @@ ggplot(data = isotopes_messy %>% filter(lake == "Killarney"), aes(x = d13cvpdb, 
 isotopes_messy$species <- factor(isotopes_messy$species, # Relevel species factor
                          levels = c("Pumpkinseed", "Bluegill", "zooplankton", "snail", "phytoplankton", "surface periphyton", "chironomid", "macrophytes"))
 
+Pump <- "#e66101"
+Blue <- "#2c7bb6"
+zoo <- "#4d4d4d" #"#bababa"  #"#b35806"
+snl <- "#9970ab" #"#4d4d4d"
+phyt <- "#66bd63"
+peri <- "#b8e186"
+chron <- "#d73027"
+macro <- "#de77ae"
+
+
 ggplot(data = isotopes_messy, aes(x = d13cvpdb, y = d15n_air, color = species)) +
-  geom_point(aes(size = fillet_as, color = species), alpha = .75) +
-  scale_size(range = c(0.5, 12))  +
+  geom_point(aes(size = fillet_as, color = species), alpha = .65) +
+  scale_size(range = c(3, 17))  +
   facet_grid(. ~ lake) +
   theme_bw() +
+  scale_color_manual(values=c(Pump,
+                              Blue,
+                              zoo,
+                              snl,
+                              phyt,
+                              peri,
+                              chron,
+                              macro)) +
   labs(x = expression(italic(delta)^13*C),
        y = expression(italic(delta)^15*N), 
        size = expression(paste(
