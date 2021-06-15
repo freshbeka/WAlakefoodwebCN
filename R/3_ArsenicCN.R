@@ -99,6 +99,6 @@ ggplot(data = isotopes_messy, aes(x = d13cvpdb, y = d15n_air, color = species)) 
          mu, g, "/", g,
          ")", sep="")))
 
-ggsave("figs/comparAs_ALSO.png", width = 10, height = 6, units = "in" )
+ggsave("figs/comparAs_ALSO.png", width = 7.5, height = 4.5, units = "in" )
 
 
