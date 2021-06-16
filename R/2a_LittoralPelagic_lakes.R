@@ -119,7 +119,7 @@ p1 <- ggplot(data = reliance,
                               "black", # Perch
                               "#2c7bb6", #BlueGill
                               "#e66101")) + #PKS
-  scale_x_continuous(name = "% littoral carbon", limits = c(0,125), 
+  scale_x_continuous(name = "littoral resource use (%)", limits = c(0,125), 
                      breaks = c(0.0,20,40, 60, 80, 100)) + 
   theme(axis.text.y = element_text(color = c("black","black","#2c7bb6","#e66101"))) +
   labs(y = "Species") +
