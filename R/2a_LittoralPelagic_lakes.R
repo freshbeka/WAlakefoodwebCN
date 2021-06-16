@@ -102,11 +102,11 @@ reliance$common <- factor(reliance$common , levels=c("largemouth bass",
                                                          "bluegill",
                                                          "pumpkinseed"))
 
-##in order to lable jittered points
+reliance$littoral.reliance.percent<-reliance$littoral.reliance*100
 
 
 p1 <- ggplot(data = reliance, 
-             aes(x = littoral.reliance, y = common, color = common, label = Lake_Year)) +
+             aes(x = littoral.reliance.percent, y = common, color = common, label = Lake_Year)) +
   geom_boxplot() + 
   geom_point() + 
   geom_label_repel(fill = alpha(c("white"),0.8),
@@ -119,8 +119,8 @@ p1 <- ggplot(data = reliance,
                               "black", # Perch
                               "#2c7bb6", #BlueGill
                               "#e66101")) + #PKS
-  scale_x_continuous(name = "littoral derived fish body carbon", limits = c(0,1.25), 
-                     breaks = c(0.0,0.2,0.4, 0.6, 0.8, 1.0)) + 
+  scale_x_continuous(name = "% littoral carbon", limits = c(0,125), 
+                     breaks = c(0.0,20,40, 60, 80, 100)) + 
   theme(axis.text.y = element_text(color = c("black","black","#2c7bb6","#e66101"))) +
   labs(y = "Species") +
   theme(legend.position = "none")
@@ -129,5 +129,5 @@ p1
 
 ggsave("figs/boxplot_littoralreliance_species_ASLO.png",p1,  width = 7, height = 5, units = "in" )
 
-
+##How many additional lakes:
 
