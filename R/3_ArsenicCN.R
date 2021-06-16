@@ -34,40 +34,28 @@ isotopes_messy <- isotopes_messy %>% filter(species != "Species")
 cols.num <- c("fillet_as", "liver_as", "gill_as","d13cvpdb","d15n_air")
 isotopes_messy[cols.num] <- sapply(isotopes_messy[cols.num],as.numeric)
 
+##Lake info
+
+isotopes_messy<-mutate(isotopes_messy, lake = if_else(lake == "Angle", "Angle Lake", lake))
+
+isotopes_messy<-mutate(isotopes_messy, lake = if_else(lake == "Killarney", "Lake Killarney", lake))
 
 ##Change CMS to snail for ASLO
 isotopes_messy<-mutate(isotopes_messy, species = if_else(species == "Chinese mystery", "snail", species))
 
 isotopes_messy<-mutate(isotopes_messy, species = if_else(species == "Chironomid", "chironomid", species))
 
-# start with plotting the C & N from Angle
+isotopes_messy<-mutate(isotopes_messy, species = if_else(species == "Pumpkinseed", "pumpkinseed (Lepomis gibbosus)", species))
 
-ggplot(data = isotopes_messy %>% filter(lake == "Angle"), aes(x = d13cvpdb, y = d15n_air, shape = species)) +
-  geom_point(aes(size = fillet_as, color = -fillet_as)) +
-  scale_shape_manual(values=seq(2,8)) +
-  theme_minimal() 
+isotopes_messy<-mutate(isotopes_messy, species = if_else(species == "Bluegill", "bluegill (Lepomis macrochirus)", species))
 
-ggplot(data = isotopes_messy %>% filter(lake == "Killarney"), aes(x = d13cvpdb, y = d15n_air, shape = species)) +
-  geom_point(aes(size = fillet_as)) +
-  scale_shape_manual(values=seq(2,8)) +
-  theme_minimal() 
+isotopes_messy<-mutate(isotopes_messy, species = if_else(species == "surface periphyton", "periphyton (surface)", species))
 
-ggplot(data = isotopes_messy %>% filter(lake == "Angle"), aes(x = d13cvpdb, y = d15n_air, color = species)) +
-  geom_point(aes(size = fillet_as, color = species), alpha = .75) +
-  scale_size(range = c(0.5, 12))  +
-  theme_minimal() +
-  labs(title = "Angle Lake", x = "d13C", y = "d15N")
+isotopes_messy<-mutate(isotopes_messy, species = if_else(species == "macrophytes", "macrophyte", species))
 
-ggplot(data = isotopes_messy %>% filter(lake == "Killarney"), aes(x = d13cvpdb, y = d15n_air, color = species)) +
-  geom_point(aes(size = fillet_as, color = species), alpha = .75) +
-  scale_size(range = c(0.5, 12))  +
-  theme_minimal() +
-  labs(title = "Killarney Lake", x = "d13C", y = "d15N")
-
-#combine with facet wrap
-
+#factor the taxa from high to low trophic level
 isotopes_messy$species <- factor(isotopes_messy$species, # Relevel species factor
-                         levels = c("Pumpkinseed", "Bluegill", "zooplankton", "snail", "phytoplankton", "surface periphyton", "chironomid", "macrophytes"))
+                         levels = c("pumpkinseed (Lepomis gibbosus)", "bluegill (Lepomis macrochirus)", "zooplankton", "snail", "phytoplankton", "periphyton (surface)", "chironomid", "macrophyte"))
 
 Pump <- "#e66101"
 Blue <- "#2c7bb6"
@@ -94,6 +82,7 @@ ggplot(data = isotopes_messy, aes(x = d13cvpdb, y = d15n_air, color = species)) 
                               macro)) +
   labs(x = expression(italic(delta)^13*C),
        y = expression(italic(delta)^15*N), 
+       color = "Taxa",
        size = expression(paste(
          "Total As (",
          mu, g, "/", g,

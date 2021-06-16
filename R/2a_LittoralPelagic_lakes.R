@@ -5,6 +5,7 @@
 library(tidyverse) # To organize and plot
 library(ggrepel) #for labeling species
 library(patchwork) #for multi-panel plot
+library(cowplot) #draw image function
 
 
 # read in the tidy data format of Julian and Bothell combined
@@ -86,10 +87,10 @@ reliance<-reliance %>% filter(!(Identity %in% c("Cottidae spp.","Ambloplites rup
 reliance$common <- reliance$Identity
 
 reliance<-mutate(reliance, common = 
-                   if_else(common == "Micropterus salmoides", "largemouth bass", 
-                           if_else(common == "Perca flavescens","yellow perch", 
-                                   if_else(common == "Lepomis gibbosus","pumpkinseed", 
-                                           if_else(common == "Lepomis macrochirus","bluegill", common)))))
+                   if_else(common == "Micropterus salmoides", "largemouth bass (Micropterus salmoides)", 
+                           if_else(common == "Perca flavescens","yellow perch (Perca flavescens)", 
+                                   if_else(common == "Lepomis gibbosus","pumpkinseed (Lepomis gibbosus)", 
+                                           if_else(common == "Lepomis macrochirus","bluegill (Lepomis macrochirus)", common)))))
 
 
 reliance$Identity <- factor(reliance$Identity , levels=c("Micropterus salmoides",
@@ -97,10 +98,10 @@ reliance$Identity <- factor(reliance$Identity , levels=c("Micropterus salmoides"
                                                          "Lepomis macrochirus",
                                                          "Lepomis gibbosus"))
 
-reliance$common <- factor(reliance$common , levels=c("largemouth bass",
-                                                         "yellow perch",
-                                                         "bluegill",
-                                                         "pumpkinseed"))
+reliance$common <- factor(reliance$common , levels=c("largemouth bass (Micropterus salmoides)",
+                                                         "yellow perch (Perca flavescens)",
+                                                         "Lepomis macrochirus","bluegill (Lepomis macrochirus)",
+                                                         "pumpkinseed (Lepomis gibbosus)"))
 
 reliance$littoral.reliance.percent<-reliance$littoral.reliance*100
 
@@ -114,20 +115,29 @@ p1 <- ggplot(data = reliance,
                                    ifelse(Lake_Year == "Killarney_2019", "Lake Killarney",''))),
                   box.padding = 0.5, 
                   min.segment.length = 0) +
-  theme_minimal() +
+  theme_bw() +
   scale_color_manual(values=c("black", # M. Salmoides
                               "black", # Perch
                               "#2c7bb6", #BlueGill
                               "#e66101")) + #PKS
-  scale_x_continuous(name = "littoral resource use (%)", limits = c(0,125), 
+  scale_x_continuous(name = "littoral resource use (%)", limits = c(0,110), 
                      breaks = c(0.0,20,40, 60, 80, 100)) + 
   theme(axis.text.y = element_text(color = c("black","black","#2c7bb6","#e66101"))) +
   labs(y = "Species") +
   theme(legend.position = "none")
 
-p1  
-
-ggsave("figs/boxplot_littoralreliance_species_ASLO.png",p1,  width = 7, height = 5, units = "in" )
+p1
+p.annotate<-ggdraw(p1) + 
+  draw_image(image='data/ps.jpg', x = 0.17, y = 0.7, 
+             width=0.15, height=0.15) +
+  draw_image(image='data/bg.jpg', x = 0.17, y = 0.47, 
+             width=0.15, height=0.15) +
+  draw_image(image='data/yp.jpg', x = 0.17, y = 0.27, 
+             width=0.15, height=0.15) +
+  draw_image(image='data/lmb.jpg', x = 0.17, y = 0.07, 
+             width=0.15, height=0.15)
+p.annotate
+ggsave("figs/boxplot_littoralreliance_species_ASLO.png",p.annotate,  width = 7, height = 5, units = "in" )
 
 ##How many additional lakes:
 
