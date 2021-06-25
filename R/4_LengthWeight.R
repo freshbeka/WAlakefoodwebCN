@@ -34,7 +34,6 @@ PKSlakes<- SIdata %>% filter(Identity == "Lepomis gibbosus")
 PKSlakes<-PKSlakes %>% filter(!is.na(Weight))
 
 PKSlakes <- PKSlakes %>% filter(!is.na(Length))
-PKSlakes$Weight<- as.numeric(PKSlakes$Weight)
 
 PKSlakes$LWR <- PKSlakes$Length/PKSlakes$Weight
 
