@@ -34,10 +34,13 @@ PKSlakes<- SIdata %>% filter(Identity == "Lepomis gibbosus")
 PKSlakes<-PKSlakes %>% filter(!is.na(Weight))
 
 PKSlakes <- PKSlakes %>% filter(!is.na(Length))
+PKSlakes$Weight <-as.numeric(PKSlakes$Weight)
 
 PKSlakes$LWR <- PKSlakes$Length/PKSlakes$Weight
 
 PKSlakes %>% group_by(Lake) %>% summarise(meanLWR = mean(LWR), sdLWR = sd(LWR))
+
+
 
 length.weight<-ggplot(data = PKSlakes, mapping = aes(x = Length, y = Weight, color = Lake)) +
   geom_point() + 
@@ -49,4 +52,4 @@ length.weight
 
 ggsave("figs/length.weight.wonky.png",
        length.weight,  
-       width = 5, height = 5, units = "in" )
+       width = 6, height = 5, units = "in" )
