@@ -8,15 +8,15 @@ library(tidyverse) #for organizing and plotting
 
 ##First, call the file from the google drive and save it in the data file location
 drive_download("https://docs.google.com/spreadsheets/d/1qe0RBzG0_HZdpPLTUukH7BOrrH4Qblte/edit#gid=890212752", 
-               path = "/Users/rebekahstiling/Desktop/RProjects/WAlakefoodwebCN/data/Trophic2.xlsx",
+               path = "/Users/rebekahstiling/Desktop/RProjects/WAlakefoodwebCN/data/Trophic3.xlsx",
                overwrite = TRUE)
 
 ## The file was saved locally to my machine, now I want to read it into RStudio 
 
 #check the sheets
-excel_sheets("data/Trophic2.xlsx")
+excel_sheets("data/Trophic3.xlsx")
 
-trophic_messy <- read_excel("data/Trophic2.xlsx", 
+trophic_messy <- read_excel("data/Trophic3.xlsx", 
                             sheet = "results", 
                             skip = 2,
                             col_types = c("text","text","text","text", "date", 
