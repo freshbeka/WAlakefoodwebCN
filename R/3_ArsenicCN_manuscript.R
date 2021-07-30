@@ -52,8 +52,7 @@ trophic_messy<-mutate(trophic_messy, species = if_else(species == "Bluegill", "b
 trophic_messy<-mutate(trophic_messy, species = if_else(species == "surface periphyton", "periphyton (surface)", species))
 
 trophic_messy<-mutate(trophic_messy, species = if_else(species == "macrophytes", "macrophyte", species))
-trophic_messy$percent_inorganic<-(trophic_messy$as_v+
-                                     trophic_messy$as_iii)/(trophic_messy$as_v+
+trophic_messy$percent_inorganic<-(trophic_messy$as_v+ trophic_messy$as_iii)/(trophic_messy$as_v+
                                                                trophic_messy$as_iii+
                                                                trophic_messy$dma+
                                                                trophic_messy$mma+
@@ -87,7 +86,7 @@ ggplot(data = onlyAs.N,
 
 ## Next step, go back to "trophic_messy" and figure out how to get zooplankton and phytoplaknton values organized into the tibble for plotting.
 
-## THen lable with tags similar to the littoral reliance plot.
+## Then lable with tags similar to the littoral reliance plot.
 
 # A look at all 25 symbols
 df2 <- data.frame(x = 1:5 , y = 1:25, z = 1:25)
