@@ -929,6 +929,33 @@ Pine_2012,Pine,2012,P119,Thuja plicata,Terrestrial plant,NA,NA,NA,NA,-28.2057630
 Pine_2012,Pine,2012,P117,Cladocera,Zooplankton,NA,NA,NA,NA,-29.592775499725796,367.2120316192546,7.0481005019977685,67.0337203680813,Cladocera
 Pine_2012,Pine,2012,P118A,Cladocera,Zooplankton,NA,NA,NA,NA,-30.101588070526947,390.8086713549507,6.851723122556306,69.49273813377445,Cladocera
 Pine_2012,Pine,2012,P118B,Cladocera,Zooplankton,NA,NA,NA,NA,-30.18865312439964,365.6375026664743,7.056229312907948,64.91293848876738,Cladocera
+Pine_2013,Pine,2013,P6,Procambarus clarkii,crayfish muscle,NA,NA,1.194,A1,-21.691355565585773,538.741980950168,7.71313328005283,159.01366738977308,Procambarus clarkii
+Pine_2013,Pine,2013,P11,Procambarus clarkii,crayfish muscle,NA,NA,0.996,A2,-23.689410383450486,426.2365241998766,7.590916406723896,132.73959266989942,Procambarus clarkii
+Pine_2013,Pine,2013,P12,Procambarus clarkii,crayfish muscle,NA,NA,0.94,A3,-24.08664612203003,414.28586159956706,7.748823605152597,123.95480974012654,Procambarus clarkii
+Pine_2013,Pine,2013,P13,Procambarus clarkii,crayfish muscle,NA,NA,0.82,A4,-25.14380457789659,361.54584183009,9.307712840203125,104.14013113706943,Procambarus clarkii
+Pine_2013,Pine,2013,P14,Procambarus clarkii,crayfish muscle,NA,NA,1.072,A5,-21.39514168407627,474.2394845625577,8.476791437126803,144.06680255251064,Procambarus clarkii
+Pine_2013,Pine,2013,P15,Procambarus clarkii,crayfish muscle,NA,NA,1.145,A6,-20.91967103659591,498.36115072076393,7.167147175512995,146.98633000765733,Procambarus clarkii
+Pine_2013,Pine,2013,P16,Procambarus clarkii,crayfish muscle,NA,NA,0.925,A7,-26.06721353571645,414.28586159956706,7.260675590354204,124.32110947788287,Procambarus clarkii
+Pine_2013,Pine,2013,P17,Procambarus clarkii,crayfish muscle,NA,NA,1.052,A8,-24.437122005965364,462.208697977671,7.229931956556013,142.2413430008978,Procambarus clarkii
+Pine_2013,Pine,2013,P18,Procambarus clarkii,crayfish muscle,NA,NA,1.095,A9,-22.62461864026106,486.2903021435887,6.725990020852608,150.63364885603227,Procambarus clarkii
+Pine_2013,Pine,2013,P19,Procambarus clarkii,crayfish muscle,NA,NA,1.118,A10,-21.65191440288064,498.36115072076393,7.444616659589422,153.54983155828546,Procambarus clarkii
+Pine_2013,Pine,2013,P20,Pacifastacus leniusculus,crayfish muscle,NA,NA,0.975,B9,-21.82682436622443,434.21476093127427,9.614473005938105,131.27639127962993,Pacifastacus leniusculus
+Pine_2013,Pine,2013,P21,Pacifastacus leniusculus,crayfish muscle,NA,NA,1.087,B10,-22.19957500659442,482.27113728367345,9.221297184156843,146.62147037184127,Pacifastacus leniusculus
+Pine_2013,Pine,2013,P22,Pacifastacus leniusculus,crayfish muscle,NA,NA,1.117,B11,-24.487313261929653,498.36115072076393,9.019037070257939,150.2690214947227,Pacifastacus leniusculus
+Pine_2013,Pine,2013,P78,Bellayma chinesis,snail muscle,NA,NA,1.11,E7,-24.106437006982652,377.3661045191042,7.397330867819893,81.67541280231441,Bellayma chinesis
+Pine_2013,Pine,2013,P81,Bellayma chinesis,snail muscle,NA,NA,0.933,E8,-21.142909406042897,364.7070455151079,8.231093445702294,65.7876911670149,Bellayma chinesis
+Pine_2013,Pine,2013,P85,Bellayma chinesis,snail muscle,NA,NA,1.014,E9,-25.159722866837726,410.30675873194036,7.0331761804002415,97.15219153970902,Bellayma chinesis
+Pine_2013,Pine,2013,P80,Bellayma chinesis,snail muscle,NA,NA,0.855,E10,-18.962086610399233,311.16030485918157,6.6449350991304845,70.96515291843149,Bellayma chinesis
+Pine_2013,Pine,2013,P77,Bellayma chinesis,snail muscle,NA,NA,1.063,E11,-23.567151506255176,394.4126039238161,7.222142443853238,83.88888975804095,Bellayma chinesis
+Pine_2013,Pine,2013,P60,Pacifastacus leniusculus,crayfish muscle,NA,NA,1.044,E12,-24.992857084816077,486.2903021435887,9.853024011048344,151.7273915752571,Pacifastacus leniusculus
+Pine_2013,Pine,2013,P56,Pacifastacus leniusculus,crayfish muscle,NA,NA,1.124,F1,-25.460877768072937,494.3353088621339,10.927809174165759,142.60648136612167,Pacifastacus leniusculus
+Pine_2013,Pine,2013,P55,Pacifastacus leniusculus,crayfish muscle,NA,NA,1.034,F2,-24.514809630227976,458.20288711518526,9.354416703699453,142.2413430008978,Pacifastacus leniusculus
+Pine_2013,Pine,2013,P58,Pacifastacus leniusculus,crayfish muscle,NA,NA,1.047,F3,-24.929957532371326,377.3661045191042,9.815917027391897,104.14013113706943,Pacifastacus leniusculus
+Pine_2013,Pine,2013,P61,Pacifastacus leniusculus,crayfish muscle,NA,NA,1.101,F4,-24.391301583332304,379.3461412297491,9.891516327426281,113.32201340416005,Pacifastacus leniusculus
+Pine_2013,Pine,2013,P87,Periphyton,algal scrape,NA,NA,3.001,A1,-25.637524860174615,514.4867748176665,3.1680397070679223,22.415439420513156,Periphyton
+Pine_2013,Pine,2013,P88,Periphyton,algal scrape,NA,NA,2.994,A2,-24.17928079099098,571.2068931028454,3.6726537655638785,45.77483595501536,Periphyton
+Pine_2013,Pine,2013,P89,Periphyton,algal scrape,NA,NA,2.987,A3,-10.833436359637526,967.6167969865427,1.4443734806744077,67.63730726730331,Periphyton
+Pine_2013,Pine,2013,P90,Periphyton,algal scrape,NA,NA,2.99,A4,-18.518027781618606,1184.3216286179456,1.9125011344356433,75.02996480579449,Periphyton
 Pine_2014,Pine,2014,SEA1_14_F04,Macrophyte,Aquatic plant,NA,NA,3.366,NA,-19.867746118093116,NA,3.684017855898321,NA,Macrophyte
 Pine_2014,Pine,2014,SEA1_14_F05,Macrophyte,Aquatic plant,NA,NA,3.45,NA,-16.18944941596636,NA,3.2055317100432217,NA,Macrophyte
 Pine_2014,Pine,2014,SEA1_14_F06,Macrophyte,Aquatic plant,NA,NA,3.772,NA,-22.851248134344864,NA,4.473725066505959,NA,Macrophyte
@@ -1821,3 +1848,112 @@ Wilderness_2014,Wilderness,2014,SEA5_14_F02,Detritus,Terrestrial plant,NA,NA,3.3
 Wilderness_2014,Wilderness,2014,SEA5_14_F10,Zooplankton,Zooplankton,NA,NA,1.276,NA,-24.43067614558599,NA,8.732057525465944,NA,Zooplankton
 Wilderness_2014,Wilderness,2014,SEA5_14_F11,Zooplankton,Zooplankton,NA,NA,1.271,NA,-24.616476872119208,NA,9.689914669519403,NA,Zooplankton
 Wilderness_2014,Wilderness,2014,SEA5_14_F12,Zooplankton,Zooplankton,NA,NA,1.251,NA,-24.597056436386456,NA,7.55770431710399,NA,Zooplankton
+Pine_2018,Pine,2018,PL18-04-Elodea-1,Elodea candensis,Aquatic plant,NA,NA,1.1879999999999999,NA,-19.84,521,4.56,29,Elodea candensis
+Pine_2018,Pine,2018,PL18-04-Elodea-2,Elodea candensis,Aquatic plant,NA,NA,1.0680000000000001,NA,-18.44,473,4.35,28,Elodea candensis
+Pine_2018,Pine,2018,PL18-04-Elodea-3,Elodea candensis,Aquatic plant,NA,NA,1,NA,-18.11,442,4.17,26,Elodea candensis
+Pine_2018,Pine,2018,PL18-05-Elodea-1,Elodea candensis,Aquatic plant,NA,NA,1.1579999999999999,NA,-14.57,495,2.59,27,Elodea candensis
+Pine_2018,Pine,2018,PL18-05-Elodea-2,Elodea candensis,Aquatic plant,NA,NA,1.161,NA,-14.89,498,2.33,27,Elodea candensis
+Pine_2018,Pine,2018,PL18-05-Elodea-3,Elodea candensis,Aquatic plant,NA,NA,1.0680000000000001,NA,-14.37,459,2.43,25,Elodea candensis
+Pine_2018,Pine,2018,PL18-06-Elodea-1,Elodea candensis,Aquatic plant,NA,NA,1.1599999999999999,NA,-13.3,511,3.63,26,Elodea candensis
+Pine_2018,Pine,2018,PL18-06-Elodea-2,Elodea candensis,Aquatic plant,NA,NA,1.1220000000000001,NA,-13.2,494,3.46,25,Elodea candensis
+Pine_2018,Pine,2018,PL18-06-Elodea-3,Elodea candensis,Aquatic plant,NA,NA,1.1479999999999999,NA,-13.31,505,3.45,26,Elodea candensis
+Pine_2018,Pine,2018,PL18-07-Potam-1,Potamogeton,Aquatic plant,NA,NA,0.997,NA,-24.84,511,5.59,40,Potamogeton
+Pine_2018,Pine,2018,PL18-07-Potam-2,Potamogeton,Aquatic plant,NA,NA,1.101,NA,-24.94,567,5.79,44,Potamogeton
+Pine_2018,Pine,2018,PL18-07-Potam-3,Potamogeton,Aquatic plant,NA,NA,1.1739999999999999,NA,-24.87,604,5.54,46,Potamogeton
+Pine_2018,Pine,2018,PL18-08-Potam-1,Potamogeton,Aquatic plant,NA,NA,1.0569999999999999,NA,-14.95,524,5.19,31,Potamogeton
+Pine_2018,Pine,2018,PL18-08-Potam-2,Potamogeton,Aquatic plant,NA,NA,1.135,NA,-15.22,561,5.2,33,Potamogeton
+Pine_2018,Pine,2018,PL18-08-Potam-3,Potamogeton,Aquatic plant,NA,NA,1.0289999999999999,NA,-15,509,5.33,30,Potamogeton
+Pine_2018,Pine,2018,PL18-09-Potam-1,Potamogeton,Aquatic plant,NA,NA,1.05,NA,-26.73,529,2.23,41,Potamogeton
+Pine_2018,Pine,2018,PL18-09-Potam-2,Potamogeton,Aquatic plant,NA,NA,1.056,NA,-26.83,539,2.36,41,Potamogeton
+Pine_2018,Pine,2018,PL18-09-Potam-3,Potamogeton,Aquatic plant,NA,NA,1.1100000000000001,NA,-26.69,566,2.51,43,Potamogeton
+Pine_2018,Pine,2018,PL18-10-Lily-1,Nymphaea,Aquatic plant,NA,NA,1.1399999999999999,NA,-26.87,581,3.44,29,Nymphaea
+Pine_2018,Pine,2018,PL18-10-Lily-2,Nymphaea,Aquatic plant,NA,NA,1.2589999999999999,NA,-27.18,643,3.82,32,Nymphaea
+Pine_2018,Pine,2018,PL18-10-Lily-3,Nymphaea,Aquatic plant,NA,NA,1.0469999999999999,NA,-27.18,535,3.47,27,Nymphaea
+Pine_2018,Pine,2018,PL18-11-Lily-1,Nymphaea,Aquatic plant,NA,NA,1.2869999999999999,NA,-26.49,652,3.52,32,Nymphaea
+Pine_2018,Pine,2018,PL18-11-Lily-2,Nymphaea,Aquatic plant,NA,NA,1.109,NA,-26.63,563,3.41,28,Nymphaea
+Pine_2018,Pine,2018,PL18-11-Lily-3,Nymphaea,Aquatic plant,NA,NA,1.083,NA,-26.66,550,3.13,28,Nymphaea
+Pine_2018,Pine,2018,PL18-12-Lily-1,Nymphaea,Aquatic plant,NA,NA,1.2450000000000001,NA,-24.58,615,1.56,28,Nymphaea
+Pine_2018,Pine,2018,PL18-12-Lily-2,Nymphaea,Aquatic plant,NA,NA,1.1160000000000001,NA,-24.6,545,1.53,26,Nymphaea
+Pine_2018,Pine,2018,PL18-12-Lily-3,Nymphaea,Aquatic plant,NA,NA,1.125,NA,-24.55,556,1.78,26,Nymphaea
+Pine_2018,Pine,2018,PL18-01-ODO-1,Odonata,Aquatic invertebrate,NA,NA,0.311,NA,-23.45,165,7.03,34,Odonata
+Pine_2018,Pine,2018,PL18-01-ODO-2,Odonata,Aquatic invertebrate,NA,NA,0.33600000000000002,NA,-23.66,180,6.79,38,Odonata
+Pine_2018,Pine,2018,PL18-01-ODO-3,Odonata,Aquatic invertebrate,NA,NA,0.34300000000000003,NA,-23.79,184,6.96,39,Odonata
+Pine_2018,Pine,2018,PL18-02-ODO-1,Odonata,Aquatic invertebrate,NA,NA,0.55500000000000005,NA,-23.15,304,7.18,63,Odonata
+Pine_2018,Pine,2018,PL18-02-ODO-2,Odonata,Aquatic invertebrate,NA,NA,0.57699999999999996,NA,-23.43,320,6.92,66,Odonata
+Pine_2018,Pine,2018,PL18-02-ODO-3,Odonata,Aquatic invertebrate,NA,NA,0.61499999999999999,NA,-23.24,342,7.21,70,Odonata
+Pine_2018,Pine,2018,PL18-03-ODO-1,Odonata,Aquatic invertebrate,NA,NA,0.36799999999999999,NA,-23.9,200,7.21,42,Odonata
+Pine_2018,Pine,2018,PL18-03-ODO-2,Odonata,Aquatic invertebrate,NA,NA,0.34100000000000003,NA,-23.75,185,7.25,40,Odonata
+Pine_2018,Pine,2018,PL18-03-ODO-3,Odonata,Aquatic invertebrate,NA,NA,0.312,NA,-23.67,171,7.13,37,Odonata
+Pine_2018,Pine,2018,PL18-50-Ramshorn-1,Planorbidae,Gastropod,NA,NA,0.57799999999999996,NA,-24.21,296,4.84,52,Planorbidae
+Pine_2018,Pine,2018,PL18-50-Ramshorn-2,Planorbidae,Gastropod,NA,NA,0.61899999999999999,NA,-24,299,4.69,53,Planorbidae
+Pine_2018,Pine,2018,PL18-50-Ramshorn-3,Planorbidae,Gastropod,NA,NA,0.53400000000000003,NA,-23.9,273,4.6,48,Planorbidae
+Pine_2018,Pine,2018,PL18-51-Ramshorn-1,Planorbidae,Gastropod,NA,NA,0.50700000000000001,NA,-23.87,258,5.01,45,Planorbidae
+Pine_2018,Pine,2018,PL18-51-Ramshorn-2,Planorbidae,Gastropod,NA,NA,0.54100000000000004,NA,-23.91,270,4.67,46,Planorbidae
+Pine_2018,Pine,2018,PL18-51-Ramshorn-3,Planorbidae,Gastropod,NA,NA,0.505,NA,-23.82,257,4.76,44,Planorbidae
+Pine_2018,Pine,2018,PL18-52-Ramshorn-1,Planorbidae,Gastropod,NA,NA,0.50900000000000001,NA,-24.91,226,3.94,38,Planorbidae
+Pine_2018,Pine,2018,PL18-52-Ramshorn-2,Planorbidae,Gastropod,NA,NA,0.50700000000000001,NA,-24.79,229,4.38,39,Planorbidae
+Pine_2018,Pine,2018,PL18-52-Ramshorn-3,Planorbidae,Gastropod,NA,NA,0.47299999999999998,NA,-24.99,209,4.49,36,Planorbidae
+Pine_2018,Pine,2018,PL18-53-MysterySn,Bellayma chinesis,Gastropod,NA,NA,0.51500000000000001,NA,-20.97,243,6.21,51,Bellayma chinesis
+Pine_2018,Pine,2018,PL18-54-MysterySn,Bellayma chinesis,Gastropod,NA,NA,0.52200000000000002,NA,-20.55,219,5.93,44,Bellayma chinesis
+Pine_2018,Pine,2018,PL18-55-MysterySn,Bellayma chinesis,Gastropod,NA,NA,0.57699999999999996,NA,-22.05,256,5.3,53,Bellayma chinesis
+Pine_2018,Pine,2018,PL18-56-MysterySn,Bellayma chinesis,Gastropod,NA,NA,0.61799999999999999,NA,-22.18,291,6.18,57,Bellayma chinesis
+Pine_2018,Pine,2018,PL18-57-MysterySn,Bellayma chinesis,Gastropod,NA,NA,0.59699999999999998,NA,-23.57,269,6.46,62,Bellayma chinesis
+Pine_2018,Pine,2018,PL18-58-MysterySn,Bellayma chinesis,Gastropod,NA,NA,0.52800000000000002,NA,-21.99,242,5.89,47,Bellayma chinesis
+Pine_2018,Pine,2018,PL18-59-MysterySn,Bellayma chinesis,Gastropod,NA,NA,0.53500000000000003,NA,-22.63,239,6.02,48,Bellayma chinesis
+Pine_2018,Pine,2018,PL18-60-MysterySn,Bellayma chinesis,Gastropod,NA,NA,0.61399999999999999,NA,-21.26,263,5.48,47,Bellayma chinesis
+Pine_2018,Pine,2018,PL18-61-MysternSn,Bellayma chinesis,Gastropod,NA,NA,0.61,NA,-19.93,275,5.89,54,Bellayma chinesis
+Pine_2018,Pine,2018,PL18-35-LMB,Micropterus salmoides,Fish,NA,NA,0.52100000000000002,NA,-26.05,268,12.14,68,Micropterus salmoides
+Pine_2018,Pine,2018,PL18-36-LMB,Micropterus salmoides,Fish,NA,NA,0.501,NA,-25.99,273,11.58,69,Micropterus salmoides
+Pine_2018,Pine,2018,PL18-38-LMB,Micropterus salmoides,Fish,NA,NA,0.55200000000000005,NA,-26.71,306,13.79,78,Micropterus salmoides
+Pine_2018,Pine,2018,PL18-39-LMB,Micropterus salmoides,Fish,NA,NA,0.58799999999999997,NA,-26.95,331,13.77,82,Micropterus salmoides
+Pine_2018,Pine,2018,PL18-40-LMB,Micropterus salmoides,Fish,NA,NA,0.53900000000000003,NA,-26.3,299,13.76,74,Micropterus salmoides
+Pine_2018,Pine,2018,PL18-41-SMB,Micropterus dolomieu,Fish,NA,NA,0.49399999999999999,NA,-25.47,276,12.61,69,Micropterus dolomieu
+Pine_2018,Pine,2018,PL18-42-SMB,Micropterus dolomieu,Fish,NA,NA,0.60499999999999998,NA,-24.93,336,11.68,85,Micropterus dolomieu
+Pine_2018,Pine,2018,PL18-43-SMB,Micropterus dolomieu,Fish,NA,NA,0.59399999999999997,NA,-25.08,335,12.69,80,Micropterus dolomieu
+Pine_2018,Pine,2018,PL18-44-SMB,Micropterus dolomieu,Fish,NA,NA,0.56100000000000005,NA,-27.45,309,12.62,79,Micropterus dolomieu
+Pine_2018,Pine,2018,PL18-45-SMB,Micropterus dolomieu,Fish,NA,NA,0.55700000000000005,NA,-25.44,282,12.47,72,Micropterus dolomieu
+Pine_2018,Pine,2018,PL18-46-SMB,Micropterus dolomieu,Fish,NA,NA,0.502,NA,-28.3,278,12.21,69,Micropterus dolomieu
+Pine_2018,Pine,2018,PL18-47-SMB,Micropterus dolomieu,Fish,NA,NA,0.56699999999999995,NA,-27.1,311,12.49,79,Micropterus dolomieu
+Pine_2018,Pine,2018,PL18-48-SMB,Micropterus dolomieu,Fish,NA,NA,0.62,NA,-25.85,332,12.21,83,Micropterus dolomieu
+Pine_2018,Pine,2018,PL18-49-SMB,Micropterus dolomieu,Fish,NA,NA,0.58599999999999997,NA,-29.56,325,12.42,81,Micropterus dolomieu
+Pine_2018,Pine,2018,PL18-62-Pumpkinseed,Lepomis gibbosus,Fish,NA,NA,0.6,NA,-22.9,329,10.9,82,Lepomis gibbosus
+Pine_2018,Pine,2018,PL18-63-Pumpkinseed,Lepomis gibbosus,Fish,NA,NA,0.58499999999999996,NA,-25.86,309,11.38,77,Lepomis gibbosus
+Pine_2018,Pine,2018,PL18-64-Pumpkinseed,Lepomis gibbosus,Fish,NA,NA,0.53500000000000003,NA,-25.12,285,11.08,71,Lepomis gibbosus
+Pine_2018,Pine,2018,PL18-65-Pumpkinseed,Lepomis gibbosus,Fish,NA,NA,0.503,NA,-24.78,278,11.09,70,Lepomis gibbosus
+Pine_2018,Pine,2018,PL18-66-Pumpkinseed,Lepomis gibbosus,Fish,NA,NA,0.56899999999999995,NA,-21.7,310,10.79,78,Lepomis gibbosus
+Pine_2018,Pine,2018,PL18-67-Pumpkinseed,Lepomis gibbosus,Fish,NA,NA,0.55300000000000005,NA,-24.9,303,10.46,75,Lepomis gibbosus
+Pine_2018,Pine,2018,PL18-68-Pumpkinseed,Lepomis gibbosus,Fish,NA,NA,0.58899999999999997,NA,-23.26,319,10.63,79,Lepomis gibbosus
+Pine_2018,Pine,2018,PL18-69-Pumpkinseed,Lepomis gibbosus,Fish,NA,NA,0.58799999999999997,NA,-21.39,317,9.82,79,Lepomis gibbosus
+Pine_2018,Pine,2018,PL18-70-Pumpkinseed,Lepomis gibbosus,Fish,NA,NA,0.53600000000000003,NA,-21.85,288,10.39,72,Lepomis gibbosus
+Pine_2018,Pine,2018,PL18-71-Pumpkinseed,Lepomis gibbosus,Fish,NA,NA,0.52100000000000002,NA,-23.5,289,9.51,71,Lepomis gibbosus
+Pine_2018,Pine,2018,PL18-72-YPerch,Perca flavescens,Fish,NA,NA,0.62,NA,-27.49,324,10.48,81,Perca flavescens
+Pine_2018,Pine,2018,PL18-73-YPerch,Perca flavescens,Fish,NA,NA,0.55200000000000005,NA,-27.12,301,10.7,76,Perca flavescens
+Pine_2018,Pine,2018,PL18-74-YPerch,Perca flavescens,Fish,NA,NA,0.57099999999999995,NA,-23.69,311,11.01,79,Perca flavescens
+Pine_2018,Pine,2018,PL18-13-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.57799999999999996,NA,-20.11,314,5.31,76,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-14-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.60599999999999998,NA,-21.02,325,5.17,80,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-15-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.57899999999999996,NA,-21.58,308,6.01,75,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-16-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.61799999999999999,NA,-21.49,323,5.15,80,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-17-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.61399999999999999,NA,-19.25,333,6.3,82,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-18-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.48,NA,-22.18,259,5.63,60,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-19-SignalCray,Pacifastacus leniusculus,Crayfish,NA,NA,0.55900000000000005,NA,-22.35,286,9.16,73,Pacifastacus leniusculus
+Pine_2018,Pine,2018,PL18-20-SignalCray,Pacifastacus leniusculus,Crayfish,NA,NA,0.57099999999999995,NA,-23.25,305,8.08,78,Pacifastacus leniusculus
+Pine_2018,Pine,2018,PL18-21-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.60399999999999998,NA,-23.12,331,8.16,81,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-22-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.55200000000000005,NA,-22.89,301,6.09,73,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-23-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.58199999999999996,NA,-27.18,304,8.31,73,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-24-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.61399999999999999,NA,-20.49,336,5.78,84,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-25-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.52200000000000002,NA,-26.12,285,7.17,74,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-26-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.61199999999999999,NA,-23.99,331,6.45,83,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-27-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.57699999999999996,NA,-21.97,316,6.37,80,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-28-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.60899999999999999,NA,-23.46,326,6.11,81,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-29-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.55600000000000005,NA,-25.24,307,6.89,78,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-30-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.60899999999999999,NA,-26.48,330,8.75,81,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-31-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.63200000000000001,NA,-27.13,345,5.82,86,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-32-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.57499999999999996,NA,-23.21,317,5.39,80,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-33-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.54200000000000004,NA,-26.54,297,6.25,74,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-34-RedSwamp,Procambarus clarkii,Crayfish,NA,NA,0.60799999999999998,NA,-25.26,325,6.32,78,Procambarus clarkii
+Pine_2018,Pine,2018,PL18-75-YPerch,Perca flavescens,Fish,NA,NA,0.52,NA,-27.36,288,10.68,72,Perca flavescens
+Pine_2018,Pine,2018,PL18-76-YPerch,Perca flavescens,Fish,NA,NA,0.56599999999999995,NA,-25.1,313,11.54,78,Perca flavescens
+Pine_2018,Pine,2018,PL18-77-YPerch,Perca flavescens,Fish,NA,NA,0.56200000000000006,NA,-22.76,306,11.21,77,Perca flavescens
+Pine_2018,Pine,2018,PL18-78-Yperch,Perca flavescens,Fish,NA,NA,0.60399999999999998,NA,-24.62,319,10.95,80,Perca flavescens
+Pine_2018,Pine,2018,PL18-79-Yperch,Perca flavescens,Fish,NA,NA,0.60099999999999998,NA,-24.32,333,10.77,83,Perca flavescens
+Pine_2018,Pine,2018,PL18-80-Yperch,Perca flavescens,Fish,NA,NA,0.52100000000000002,NA,-27.31,286,10.42,72,Perca flavescens

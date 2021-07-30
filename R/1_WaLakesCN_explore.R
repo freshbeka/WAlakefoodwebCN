@@ -10,10 +10,10 @@ library(tidyverse) # To organize and plot
 ##Note to self: RETURN TO THIS AND REMOVE PADDEN, and low number species. 5/27/2021
 
 # Review the sheet names in order to select the correct one.  
-excel_sheets("data/WA_Lake_SI_Data2021_PRELIM.xlsx")
+excel_sheets("data/WA_Lake_SI_Data2021.xlsx")
 
 ## read in the worksheet with the isotope data
-original <- read_excel("data/WA_Lake_SI_Data2021_PRELIM.xlsx", sheet = "SI_Data")
+original <- read_excel("data/WA_Lake_SI_Data2021.xlsx", sheet = "SI_Data")
 
 #give it a new name so as to be able to reference the original
 SIdata <- original 
@@ -64,10 +64,10 @@ SIdata_tidy %>% distinct(Group) # great, this is helpful.
 
 #how many lakes in all
 n_distinct(SIdata_tidy$Lake_Year)
-#there are 33 lakes. That is too many for one grid. I'll do two grids of 16/17
+#there are 34 lakes. That is too many for one grid. I'll do two grids of 16/17
 
-set1<-unique(SIdata_tidy$Lake_Year)[1:16]
-set2<-unique(SIdata_tidy$Lake_Year)[17:32]
+set1<-unique(SIdata_tidy$Lake_Year)[1:17]
+set2<-unique(SIdata_tidy$Lake_Year)[18:34]
 
 
 ##same idea, but with ggplot and facet wrap
@@ -81,8 +81,8 @@ p2<-ggplot(data = SIdata_tidy %>% filter(Lake_Year %in% set2), aes(x = d13C, y =
   theme_bw() +
   facet_wrap(~ Lake_Year)
 
-ggsave("figs/Biplot1-16.png",p1,  width = 16, height = 9, units = "in" )
-ggsave("figs/Biplot17-32.png",p2,  width = 16, height = 9, units = "in" )
+ggsave("figs/BiplotA.png",p1,  width = 16, height = 9, units = "in" )
+ggsave("figs/BiplotB.png",p2,  width = 16, height = 9, units = "in" )
 
 ## All of Julian's together
 ggplot(data = SIdata_tidy, aes(x = d13C, y = d15N, color = Group)) +
