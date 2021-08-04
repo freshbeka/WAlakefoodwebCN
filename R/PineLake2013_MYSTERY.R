@@ -135,13 +135,12 @@ hulls
 # Then, on top of this, what if I turn each NA into a ## then we can plot just the numbers and id what is what. Trying this...
 
 IDNAs <- mystpine %>% filter(Group2.0 == "Fish") %>% filter(is.na(Identity))
-IDNAs$ID <- 1:nrow(IDNAs)
 
 nums <-hulls + geom_text(data = IDNAs, 
                   color = "black",
                   size = 5,
                   aes(x=d13C, y=d15N, 
-                      label = ID))
+                      label = `Item #`))
 nums
-ggsave("figs/Pine2013Mystery_hulls&numbers.png",nums,  width = 7, height = 5, units = "in" )
+ggsave("figs/Pine2013Mystery_hulls&numbers.png",nums,  width = 12, height = 10, units = "in" )
 ## This is a plot we could work with, or at least start working with. I'll stop here.
