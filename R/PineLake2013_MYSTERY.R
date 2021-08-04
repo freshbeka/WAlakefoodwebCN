@@ -144,3 +144,48 @@ nums <-hulls + geom_text(data = IDNAs,
 nums
 ggsave("figs/Pine2013Mystery_hulls&numbers.png",nums,  width = 12, height = 10, units = "in" )
 ## This is a plot we could work with, or at least start working with. I'll stop here.
+
+##CRAYFISH ####
+## Now I'll do this Group by Group. The next category is crayfish
+cray <- mystpine %>% filter(Group2.0 == "Crayfish")
+cp <-ggplot(data = cray, 
+            aes(x = d13C, y = d15N, color = Identity)) + 
+  geom_point()+ 
+  theme_bw()
+cp
+
+pl<-mystpine %>% filter(Group2.0 == "Crayfish") %>% filter(Identity == "Pacifastacus leniusculus" & Lake_Year != "Pine_2013")
+plChull<-pl[chull(pl$d13C, pl$d15N),]
+pc<-mystpine %>% filter(Group2.0 == "Crayfish") %>% 
+  filter(Identity == "Procambarus clarkii" & Lake_Year != "Pine_2013")
+pcChull<-pc[chull(pc$d13C, pc$d15N),]
+crayChull <- bind_rows(plChull,pcChull)
+
+crayhull<-cp + geom_polygon(data=crayChull, 
+                  aes(x=d13C, y=d15N, 
+                      group = Identity,  
+                      fill = Identity), 
+                  alpha = 0.2,
+                  linetype = "blank")
+
+crayhull
+
+IDNAs <- mystpine %>% filter(Group2.0 == "Crayfish" & Lake_Year == "Pine_2013") 
+
+craynums <-crayhull + geom_text(data = IDNAs, 
+                              color = "black",
+                              size = 5,
+                              aes(x=d13C, y=d15N, 
+                                  label = `Item #`))
+
+craynums <-crayhull + 
+  geom_point(data = IDNAs, size = 8,
+             aes(x=d13C, y=d15N,
+                 color = Identity)) + 
+  geom_text(data = IDNAs,
+            color = "black",
+            size = 5, 
+            aes(x=d13C, y=d15N,
+                label = `Item #`))
+craynums
+ggsave("figs/Pine2013Mystery_crayfish_hulls&numbers.png",craynums,  width = 12, height = 10, units = "in" )
