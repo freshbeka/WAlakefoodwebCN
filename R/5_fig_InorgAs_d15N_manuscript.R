@@ -64,6 +64,46 @@ p2<-ggplot(data = d15N_As_tidy,
        color = "Lake",
        shape = "Species") 
 p2
-ggsave("figs/InOrgAs vs d15N_allpts.png",p2,  width = 8, height = 5, units = "in" )
+ggsave("figs/InOrgAs vs d15N_allpts&means.png",p2,  width = 8, height = 5, units = "in" )
+
+
+# establish levels so the plotting order is as desired
+d15N_As_tidy$species <- factor(d15N_As_tidy$species , 
+                               levels=c("pumpkinseed (Lepomis gibbosus)",
+                                                     "bluegill (Lepomis macrochirus)",
+                                                     "Chinese mystery",
+                                                     "chironomid",
+                                                     "zooplankton",
+                                                     "phytoplankton",
+                                                     "periphyton (surface)",
+                                                     "macrophyte"))
+
+
+p3<-ggplot(data = d15N_As_tidy, 
+           aes(x = percent_inorganic, 
+               y = d15n_air)) + 
+  geom_point(aes(shape = species, 
+                 color = lake, 
+                 fill = lake),
+             size = 3) + 
+  geom_smooth(method = "lm", 
+              alpha = 0.1, 
+              aes(group = lake,
+                  fill = lake,
+                  color = lake),
+              level=0.90) +
+  scale_shape_manual(values=c(16,17,15,8, 3, 9, 7, 18)) +
+  scale_color_manual(values=c("#e66101",
+                              "#2c7bb6" )) + #PKS
+  scale_fill_manual(values=c("#e66101",
+                             "#2c7bb6"), 
+                    guide = 'none') + 
+  theme_bw() +
+  labs(x = "% inorganic As",
+       y = expression(italic(delta)^15*N), 
+       color = "Lake",
+       shape = "Species") 
+p3
+ggsave("figs/InOrgAs vs d15N_allpts.png",p3,  width = 8, height = 5, units = "in" )
 
 

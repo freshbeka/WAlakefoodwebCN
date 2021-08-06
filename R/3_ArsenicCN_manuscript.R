@@ -146,7 +146,8 @@ ggplot(data = d15NAs_data,
            color = lake,
            fill = lake,
            shape = species)) + 
-  geom_smooth(method = "lm", aes(group = lake)) +
+  geom_smooth(method = "lm", 
+              aes(group = lake)) +
   geom_point() + 
   geom_point(data=gd, size = 4) +
   scale_shape_manual(values=c(3,7,8,15:18,25)) + 
@@ -159,6 +160,12 @@ ggplot(data = d15NAs_data,
 # Test H_0: percent_inorganic*lake = 0 for difference in slopes.
 mod <- lm(d15n_air~percent_inorganic*lake,data=d15NAs_data)
 summary(mod)
+tidy(mod)
+
+angmod <- lm(d15n_air~percent_inorganic,data=d15NAs_data %>% filter(lake == "Angle Lake"))
+summary(angmod)
+kilmod <- lm(d15n_air~percent_inorganic,data=d15NAs_data %>% filter(lake == "Lake Killarney"))
+summary(kilmod)
 tidy(mod)
 
 # Test relationship with and without groups. No difference
