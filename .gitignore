@@ -37,3 +37,6 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+#Now that I, Beka, am working from two workstations, I'm not going to track the proj name
+.Rproj
