@@ -7,17 +7,19 @@ library(janitor) # to clean up rownames
 library(tidyverse) #for organizing and plotting
 library(broom) #for tidy model output
 
-##First, call the file from the google drive and save it in the data file location
+##First, call the file from the google drive and save it in the data file location. This needs to be adjusted based on whomever is using this script, and based on what machine you are using.
 drive_download("https://docs.google.com/spreadsheets/d/1qe0RBzG0_HZdpPLTUukH7BOrrH4Qblte/edit#gid=890212752", 
-               path = "/Users/rebekahstiling/Desktop/RProjects/WAlakefoodwebCN/data/Trophic3.xlsx",
+               
+               path = "/GitProjects/Arsenic/data/Trophic4.xlsx",
+             #  path = "/Users/rebekahstiling/Desktop/Projects/WAlakefoodwebCN/data/Trophic3.xlsx",
                overwrite = TRUE)
 
 ## The file was saved locally to my machine, now I want to read it into RStudio 
 
 #check the sheets
-excel_sheets("data/Trophic3.xlsx")
+excel_sheets("data/Trophic4.xlsx")
 
-trophic_messy <- read_excel("data/Trophic3.xlsx", 
+trophic_messy <- read_excel("data/Trophic4.xlsx", 
                             sheet = "results", 
                             skip = 2,
                             col_types = c("text","text","text","text", "date", 
@@ -158,9 +160,14 @@ ggplot(data = d15NAs_data,
        shape = "Species") 
 
 # Test H_0: percent_inorganic*lake = 0 for difference in slopes.
-mod <- lm(d15n_air~percent_inorganic*lake,data=d15NAs_data)
+mod <- lm(d15n_air~percent_inorganic+percent_inorganic:lake,data=d15NAs_data)
 summary(mod)
 tidy(mod)
+
+mod.alt <- lm(d15n_air~percent_inorganic*lake,data=d15NAs_data)
+summary(mod.alt)
+tidy(mod.alt)
+anova(mod.alt)
 
 angmod <- lm(d15n_air~percent_inorganic,data=d15NAs_data %>% filter(lake == "Angle Lake"))
 summary(angmod)
@@ -190,3 +197,25 @@ ggplot(data = d15NAs_data,
        shape = "Species") 
 
 
+## adding plots switching axis
+ggplot(data = d15NAs_data, 
+       aes(x = d15n_air, 
+           y = percent_inorganic, 
+           color = lake,
+           fill = lake,
+           shape = species)) + 
+  geom_smooth(method = "lm", 
+              aes(group = lake)) +
+  geom_point() + 
+  #geom_point(data=gd, size = 4) +
+  scale_shape_manual(values=c(3,7,8,15:18,25)) + 
+  theme_bw() +
+  labs(x = expression(italic(delta)^15*N ,
+       y = "% inorganic As" ), 
+       color = "Lake",
+       shape = "Species") 
+
+mod.swap <- lm(percent_inorganic~ d15n_air*lake,data=d15NAs_data)
+summary(mod.swap)
+tidy(mod.swap)
+anova(mod.swap)
