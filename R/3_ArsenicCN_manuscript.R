@@ -178,7 +178,8 @@ tidy(mod)
 # Test relationship with and without groups. No difference
 tidy(anova(lm(d15n_air~percent_inorganic,data=d15NAs_data),lm(d15n_air~percent_inorganic*lake,data=d15NAs_data)))
 
-
+m0<-lm(d15n_air~percent_inorganic,data=d15NAs_data)
+summary(m0)
 
 ggplot(data = d15NAs_data, 
        aes(x = percent_inorganic, 
@@ -219,3 +220,10 @@ mod.swap <- lm(percent_inorganic~ d15n_air*lake,data=d15NAs_data)
 summary(mod.swap)
 tidy(mod.swap)
 anova(mod.swap)
+
+##Doing it one more time with final data
+
+data_1<-read_excel("data/FinalData_20230417.xlsx")
+
+m0<-lm(d15N~iAs,data=data_1)
+summary(m0)
