@@ -38,15 +38,15 @@ long$Taxa_f = factor(long$Taxa,
 
 
 
-
-Pump <- "#e66101"
-Blue <- "#2c7bb6"
-zoo <- "#4d4d4d" #"#bababa"  #"#b35806"
-snl <- "#9970ab" #"#4d4d4d"
-phyt <- "#66bd63"
-peri <- "#b8e186"
-chron <- "#d73027"
-macro <- "#de77ae"
+# 
+# Pump <- "#e66101"
+# Blue <- "#2c7bb6"
+# zoo <- "#4d4d4d" #"#bababa"  #"#b35806"
+# snl <- "#9970ab" #"#4d4d4d"
+# phyt <- "#66bd63"
+# peri <- "#b8e186"
+# chron <- "#d73027"
+# macro <- "#de77ae"
                 
 ## Manuscript figure 4 ####
 ggplot(long, aes(x=littoral_sediment_totAs_mean, 
@@ -76,8 +76,8 @@ ggplot(long, aes(x=littoral_sediment_totAs_mean,
                         label.y.npc = 1,
                         label.x.npc = "left",
                         show.legend = FALSE) +
-  labs(x = expression(paste("Total As in sediment (",mu, g, "/", g,")", sep="")),
-       y = expression(paste("% inorganic As ( ",mu, g, "/", g,")", sep=""))) +
+  labs(x = expression(paste("Total As in sediment (",mu, "g ", g^-1,")", sep="")),
+       y = expression(paste("inorganic As ( ",mu, "g ", g^-1,")", sep=""))) +
   facet_wrap(vars(Taxa_f), 
              scales = "free_y",
              ncol = 2,
@@ -86,6 +86,7 @@ ggplot(long, aes(x=littoral_sediment_totAs_mean,
 #   theme(legend.position = c(.95, .75),
 #         legend.justification = c(1, 0))
 
+expression(paste("Total As (",mu,"g ", g^-1,")", sep=""))
 ggsave("figs/TotAsvTotinAs_Fig4.png", width = 6, height = 7, units = "in" )
 
 ##struggling with adding equation. 
