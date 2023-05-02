@@ -2,7 +2,7 @@
 
 ##First, read in packages that are needed
 library(readxl) #To read the excel file 
-library(ggplot2) # to plot
+library(tidyverse) # to plot
 library(ggpubr) #to add slop and R2 equations
 library(patchwork)
 
@@ -50,29 +50,30 @@ macro <- "#de77ae"
                 
 ## Manuscript figure 4 ####
 ggplot(long, aes(x=littoral_sediment_totAs_mean, 
-                 y = organism_iAs, 
-                 color = Taxa, 
-                 fill = Taxa)) +
+                 y = organism_iAs
+                 # , 
+                 # color = Taxa, 
+                 # fill = Taxa
+                 )) +
   geom_point()+
-  geom_smooth(method = "lm", 
-              aes(group = Taxa)) +
+  geom_smooth(method = "lm", color = "black") +
   theme_bw() +
   theme(text=element_text(size=12,  
                           family="serif")) +
-  scale_color_manual(values=c(peri,
-                              phyt,
-                              snl,
-                              Pump,
-                              zoo),
-                     guide = "none")+
-  scale_fill_manual(values=c(peri,
-                             phyt,
-                             snl,
-                             Pump,
-                             zoo),
-                    guide="none")+
+  # scale_color_manual(values=c(peri,
+  #                             phyt,
+  #                             snl,
+  #                             Pump,
+  #                             zoo),
+  #                    guide = "none")+
+  # scale_fill_manual(values=c(peri,
+  #                            phyt,
+  #                            snl,
+  #                            Pump,
+  #                            zoo),
+  #                   guide="none")+
   stat_regline_equation(aes(label = paste(..eq.label.., ..rr.label.., sep = "*`,`~")),
-                        label.y.npc = 'top',
+                        label.y.npc = 1,
                         label.x.npc = "left",
                         show.legend = FALSE) +
   labs(x = expression(paste("Total As in sediment (",mu, g, "/", g,")", sep="")),
