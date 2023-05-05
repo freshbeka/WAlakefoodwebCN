@@ -27,12 +27,18 @@ long<-reformat  %>%  select(
 long$Taxa <- str_replace_all(long$Taxa, "_iAs_mean", "")
 
 #order the organism factors so the plots will be in the desired order
-long$Taxa_f = factor(long$Taxa, 
-                        levels=c('phytoplankton',
+long$Taxa_f = factor(long$Taxa,
+                     levels=c('phytoplankton',
                                  "periphyton",
                                  'zooplankton',
                                  'snail',
-                                 'sunfish'))
+                                 'sunfish'),
+                     labels = c('(a) phytoplankton',
+                                "(b) periphyton",
+                                '(c) zooplankton',
+                                '(d) snail',
+                                '(e) sunfish'))
+
 
 ## Manuscript figure 4 ####
 #https://stackoverflow.com/questions/7549694/add-regression-line-equation-and-r2-on-graph (mainly referenced the long answer provided by package author)
@@ -45,16 +51,19 @@ ggplot(long, aes(x=littoral_sediment_totAs_mean,
   theme(text=element_text(size=12,  
                           family="serif")) +
   stat_poly_eq(use_label("eq"),
-               size = 3) + 
+               size = 3,
+               family="serif") + 
   stat_poly_eq(use_label(c("R2", "p")),
                size = 3,
                rr.digits = 3,
-               label.y = .85) +
+               label.y = .85,
+               family="serif") +
   labs(x = expression(paste(mu, "g As ", g^-1, sep="")),
        y = expression(paste(mu, "g iAs ", g^-1, sep=""))) +
   facet_wrap(vars(Taxa_f), 
              scales = "free_y",
              ncol = 2,
              as.table = F) #this makes the top corner empty instead of the bottom
+
 
 ggsave("figs/TotAsvTotinAs_Fig4.png", width = 6, height = 7, units = "in" )
