@@ -5,6 +5,7 @@ library(readxl) #To read the excel file
 library(tidyverse) # to plot
 library(ggpmisc) #for adding slope, R2, and p
 
+
 # Review the sheet names in order to select the correct one.  
 excel_sheets("data/TrophicTransfer_R_Reformatted_v3.xlsx")
 
@@ -29,10 +30,10 @@ long$Taxa <- str_replace_all(long$Taxa, "_iAs_mean", "")
 #order the organism factors so the plots will be in the desired order
 long$Taxa_f = factor(long$Taxa,
                      levels=c('phytoplankton',
-                                 "periphyton",
-                                 'zooplankton',
-                                 'snail',
-                                 'sunfish'),
+                              "periphyton",
+                              'zooplankton',
+                              'snail',
+                              'sunfish'),
                      labels = c('(a) phytoplankton',
                                 "(b) periphyton",
                                 '(c) zooplankton',
@@ -67,3 +68,5 @@ ggplot(long, aes(x=littoral_sediment_totAs_mean,
 
 
 ggsave("figs/TotAsvTotinAs_Fig4.png", width = 6, height = 7, units = "in" )
+
+
